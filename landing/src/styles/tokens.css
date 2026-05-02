@@ -1,0 +1,114 @@
+:root {
+  /* === 배경 === */
+  --color-bg-cool:        #FFFFFF;
+  --color-bg-warm:        #F8F4ED;
+  --color-bg-deep:        #0A0E1A;
+  --color-bg-mist:        #F4FBFA;
+
+  /* === 텍스트 === */
+  --color-text-primary:   #0A0E1A;
+  --color-text-secondary: #2D3340;
+  --color-text-muted:     #5A5F6E;
+  --color-text-subtle:    #8C92A1;
+  --color-text-on-deep:   #F5F7FA;
+
+  /* === 액센트 — 임상 === */
+  --color-clinical:        #00B894;
+  --color-clinical-soft:   #B2EFE3;
+  --color-clinical-deep:   #007A66;
+
+  /* === 액센트 — 코칭 === */
+  --color-coaching:        #FF7A59;
+  --color-coaching-soft:   #FFE1D6;
+  --color-coaching-deep:   #C24A2F;
+
+  /* === CTA === */
+  --color-cta:             #1F4FE0;
+  --color-cta-hover:       #1A41C7;
+  --color-cta-soft:        #DCE5FF;
+
+  /* === 시맨틱 === */
+  --color-success:         #16A34A;
+  --color-warn:            #EA580C;
+  --color-error:           #DC2626;
+  --color-info:            #0284C7;
+
+  /* === 라인 === */
+  --color-line:            #E8EAEE;
+  --color-line-strong:     #C9CDD4;
+  --color-line-on-deep:    #2A3142;
+
+  /* === 차트 === */
+  --color-chart-fast:      #FB7185;
+  --color-chart-target:    #00B894;
+  --color-chart-progress:  #1F4FE0;
+  --color-chart-grid:      #E8EAEE;
+
+  /* === 폰트 === */
+  --font-sans:  'Pretendard Variable', 'Inter', -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Helvetica Neue', sans-serif;
+  --font-serif: 'Noto Serif KR', 'Source Serif Pro', Georgia, serif;
+  --font-mono:  'JetBrains Mono', 'SF Mono', Consolas, monospace;
+
+  /* === 간격 (8px 기반) === */
+  --space-0:   0;
+  --space-1:   4px;
+  --space-2:   8px;
+  --space-3:   12px;
+  --space-4:   16px;
+  --space-5:   20px;
+  --space-6:   24px;
+  --space-8:   32px;
+  --space-10:  40px;
+  --space-12:  48px;
+  --space-16:  64px;
+  --space-20:  80px;
+  --space-24:  96px;
+  --space-32:  128px;
+  --space-40:  160px;
+
+  /* === 컨테이너 === */
+  --container-max:    1200px;
+  --container-narrow:  880px;
+  --container-prose:   680px;
+
+  /* === Border Radius === */
+  --radius-sm:   6px;
+  --radius-md:   12px;
+  --radius-lg:   16px;
+  --radius-xl:   24px;
+  --radius-2xl:  32px;
+  --radius-full: 9999px;
+
+  /* === Shadow === */
+  --shadow-xs:  0 1px 2px rgba(10, 14, 26, 0.04);
+  --shadow-sm:  0 2px 4px rgba(10, 14, 26, 0.05),
+                0 1px 2px rgba(10, 14, 26, 0.04);
+  --shadow-md:  0 6px 12px rgba(10, 14, 26, 0.06),
+                0 2px 4px rgba(10, 14, 26, 0.04);
+  --shadow-lg:  0 12px 24px rgba(10, 14, 26, 0.08),
+                0 4px 8px rgba(10, 14, 26, 0.04);
+  --shadow-xl:  0 24px 48px rgba(10, 14, 26, 0.10),
+                0 8px 16px rgba(10, 14, 26, 0.06);
+  --shadow-glow-clinical: 0 0 32px rgba(0, 184, 148, 0.18);
+  --shadow-glow-coaching: 0 0 32px rgba(255, 122, 89, 0.18);
+
+  /* === 그라데이션 === */
+  --grad-hero:
+    radial-gradient(ellipse 60% 50% at 75% 30%, var(--color-clinical-soft) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 40% at 25% 70%, var(--color-coaching-soft) 0%, transparent 70%),
+    var(--color-bg-cool);
+  --grad-solution:
+    linear-gradient(180deg, var(--color-bg-cool) 0%, var(--color-bg-mist) 30%, var(--color-bg-mist) 100%);
+  --grad-airpods-demo:
+    radial-gradient(ellipse 80% 60% at 50% 30%, rgba(0, 184, 148, 0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 50% 80%, rgba(255, 122, 89, 0.10) 0%, transparent 60%),
+    var(--color-bg-deep);
+  --grad-cta:
+    linear-gradient(135deg, var(--color-cta) 0%,
+      color-mix(in srgb, var(--color-cta) 80%, var(--color-coaching) 20%) 100%);
+  --grad-final-cta:
+    linear-gradient(180deg, var(--color-bg-deep) 0%,
+      color-mix(in srgb, var(--color-bg-deep) 90%, var(--color-clinical) 10%) 100%);
+
+  --ease-reveal: cubic-bezier(0.16, 1, 0.3, 1);
+}

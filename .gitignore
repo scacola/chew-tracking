@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+landing/node_modules/
+
+# Build outputs
+landing/dist/
+landing/dist-ssr/
+
+# OS / editor
+.DS_Store
+*.log
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# Env
+.env
+.env.local
+.env.*.local
+
+# Claude Code internal
+.claude-task-cache/
