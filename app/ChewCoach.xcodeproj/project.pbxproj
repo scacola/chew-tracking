@@ -1,0 +1,876 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		044B8564CC0BB41F9340CADE /* DailyInsight.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16837396D66FF489AA687E5 /* DailyInsight.swift */; };
+		0AA9530E969C6D07DA6FAC4E /* TriggerEvaluator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799EAF99CEA6B376D3A0D025 /* TriggerEvaluator.swift */; };
+		0BDCB42322F41F2F427B6A18 /* PersonaCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9067A261DCA70E1F87F9E29 /* PersonaCard.swift */; };
+		1ADE5D789F7D7C4FAB736C5C /* UserCalibration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757C18DAC58E8844F7CF08E6 /* UserCalibration.swift */; };
+		1F74A61FE7712A5C4E440BFD /* MessageLibraryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16DBAF21874900CD1E1AC341 /* MessageLibraryTests.swift */; };
+		20AAD70854F92B181ABA38E0 /* MessagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6665D1A496EB1982D5152800 /* MessagePicker.swift */; };
+		23A592C2FDC881F9489DAE4E /* Color+Tokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32758EDAD7D2E9612D0C6A52 /* Color+Tokens.swift */; };
+		26FA3694928EF759462DAADA /* ChewCoachApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A363584EF551BA634B847F /* ChewCoachApp.swift */; };
+		2A039E45BD5A51FCA7B427C8 /* KoreanParticle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C1288E039B10991DFC0A6B /* KoreanParticle.swift */; };
+		2FC6F4E633FAF12BEFBF4388 /* IMUFrameBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A6B4E89607E9FB1B5B21580 /* IMUFrameBuffer.swift */; };
+		30E9F42DE8812EA6F90A7F9C /* CalibrationEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19044A66FCEB580C70BF388 /* CalibrationEngine.swift */; };
+		3328492F28B745B77A7CB054 /* ChewDetectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7437053B72F016B0816205 /* ChewDetectorTests.swift */; };
+		345475D635FEC372528299A3 /* ChewDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302C098AB3E6F7E7755360A5 /* ChewDetector.swift */; };
+		3B2E50A0DE54F4DEBC77104C /* OnboardingCalibrationIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB4948AAACADB2045268421 /* OnboardingCalibrationIntroView.swift */; };
+		3B52CBD90DA478B2611FE2C0 /* MessageLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831E6A70BAE6B814F8BE874D /* MessageLibrary.swift */; };
+		3DDEC5615650B68488D4303A /* PatternEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB5EABE6623B1403EC8F422 /* PatternEngine.swift */; };
+		4102B8B85B6606BEBD0E1C65 /* Motion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF3D2A25E0F5490577E9BA8 /* Motion.swift */; };
+		44D2048F5826FA3DD7B4E908 /* MealRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B21265D64224BBC3AA73B1 /* MealRepositoryTests.swift */; };
+		451D1D50728BE39A0153D697 /* ComfortReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1308E0D0420CF5E93746B939 /* ComfortReport.swift */; };
+		4920367CDA4E3C0B4BD88F59 /* TodayHeaderCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E47F0652A4BF43705D6A71 /* TodayHeaderCard.swift */; };
+		531830E51801BEC05B70260F /* CalibrationEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0562BCDAB35EC9CA93751D /* CalibrationEngineTests.swift */; };
+		53D358EA8C6E64C1CE737586 /* InsightCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05B2F2952BBF55AEA9C5473 /* InsightCard.swift */; };
+		5481266679C8485AD079DBD4 /* WeeklyRecapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1607600414F1C9DE10BBC667 /* WeeklyRecapView.swift */; };
+		57E9C719C6D707633C2A1835 /* MealTrendChartCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3224D4E184E448E1D5FDFAB /* MealTrendChartCard.swift */; };
+		582D117FF3E694599154FD67 /* LiveMotionStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E912408AFBD416A671C356 /* LiveMotionStream.swift */; };
+		58EBB1158F9A5A1BFBD8F05D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9FDAA4D763D28275BB3F573B /* Assets.xcassets */; };
+		61A8664E2AD6213EE78FBD13 /* MealSessionTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC5F376EA7DBA666B2F23C8 /* MealSessionTracker.swift */; };
+		73BD3D7160C63EA45F92D292 /* OnboardingPersonaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199A0CE48A8420CA98EC76B3 /* OnboardingPersonaView.swift */; };
+		75EB82345FE33ADD352B890E /* MealSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4693D2D241678D2C5244F713 /* MealSession.swift */; };
+		7B3889115062E4B3C944B2CB /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A18E272E0C0C9D2805CC305 /* AppEnvironment.swift */; };
+		7EE00C3C0BE17E8425A916D8 /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF9BD60D5C0D7DAF35D44B17 /* Spacing.swift */; };
+		80A98F84478669F4C8BC3BDD /* ComfortSelfReportRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF4994100B322E3D0DD70BA8 /* ComfortSelfReportRow.swift */; };
+		80F6DB84C829BC322960F226 /* MotionStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47AE281A38DDD44352B6050 /* MotionStream.swift */; };
+		82BE71006951C4532B24E4C8 /* ChewBreathBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69F37C68B6CB947C68721F8 /* ChewBreathBadge.swift */; };
+		858077FDA9B120AD617AFE64 /* ChewSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DE810805357A1FF19C89AE /* ChewSample.swift */; };
+		8DA0C9F7EE1CAD137941052D /* MockMotionStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C74424860A0D80C84FAE1D /* MockMotionStream.swift */; };
+		90B8BC915AEDDF22FEF8E071 /* DetectorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B528A93587899246AF9DEE7 /* DetectorConstants.swift */; };
+		9180781EC3593D6078706BE3 /* IMUDataCollectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C9C1F585D389CDD2BF6B39 /* IMUDataCollectionTests.swift */; };
+		94B8948E4CFFCF0184B0FB61 /* SignalTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5752380ABE66A77BB54D11A3 /* SignalTypes.swift */; };
+		9BE6C0484660780DDB08B427 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F8A01079A26EE4052238F1 /* SettingsView.swift */; };
+		A0716395B7B1FA52C4E150C5 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5499AF9862A2DE8D8E203919 /* DashboardView.swift */; };
+		A6A9A3CE97F5D6C19E56D226 /* InsightGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288256835569502583D03BE1 /* InsightGenerator.swift */; };
+		AA7211B35BAB98C0D3399A30 /* MessageRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290B4D2C779E3A04F5B4EC29 /* MessageRenderer.swift */; };
+		AF7239D8CAF36BB97EF3B602 /* CoachingMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CDFF95D6064BDB740468A76 /* CoachingMessage.swift */; };
+		B6572941C8AC851F9E554805 /* MealStartConfirmationSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E1BFC1D50389B56D041055 /* MealStartConfirmationSheet.swift */; };
+		C0E0B5E4E93AD33427FE9FF5 /* MealDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90D4A42DD4AA1A0DC4D034A /* MealDetailView.swift */; };
+		CAE4E3C55C231E0A066A8217 /* MealResultCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20B48DE753E580E0CB92F2B /* MealResultCard.swift */; };
+		D1B572E7E41762973CE4D3B4 /* OnboardingMotionPermissionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A90AEBB93D2F817C2F219AE /* OnboardingMotionPermissionView.swift */; };
+		D6DBF50B89C43BF4BDF07AB9 /* MealHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F93E93BF245E2CB39A9780 /* MealHistoryView.swift */; };
+		D7362DFE9B8A610205081638 /* ActiveMealView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831E998D7D74B3F233BE1C02 /* ActiveMealView.swift */; };
+		D8ABDDEE6175D93B59E16D64 /* OnboardingFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BBC5FF77400992BA9F633A /* OnboardingFlow.swift */; };
+		D9B47FA73F092830AA41787C /* RootRouterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B766AF3D0232737853918DA3 /* RootRouterView.swift */; };
+		DCC3041E6E639A79356707C7 /* CoachingContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460CA6FAA057515D6AAA4F1D /* CoachingContext.swift */; };
+		E13F831D8F61A27F4597B7D5 /* ArtifactFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8D2A4471805BFFAFEF752D /* ArtifactFilter.swift */; };
+		E1D9D4AEE7BECE110FBD87A8 /* DashboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A479298BE17520F359C54AE /* DashboardViewModel.swift */; };
+		E2A0C6E06D1BB6E4F4802075 /* ActiveMealViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE5BF7DEF725882BD7117646 /* ActiveMealViewModel.swift */; };
+		E4001DA5053CA02E9A31598C /* PostHocAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 860BC1FC6BB105A62EFD5066 /* PostHocAnalyzer.swift */; };
+		E492051B011C97D7AD30E590 /* OnboardingWelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7ADBF15663C8A34C68E2F2 /* OnboardingWelcomeView.swift */; };
+		E5F4E1F561E5B29B7671C39E /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9210052D2556F689D5B2BF /* UserPreferences.swift */; };
+		E890F5BCDA668E13173DCC0D /* AudioSessionMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8523F744C8756C8213FE0D2 /* AudioSessionMonitor.swift */; };
+		EA81D85A6EA8E95255393E83 /* MealRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336EE6FC43B50CF4CDE82034 /* MealRepository.swift */; };
+		EBB38BD9C6142E820D1DD3C1 /* PermissionCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CE88353C4A1B05891758D0 /* PermissionCoordinator.swift */; };
+		EC879F80F232B11BC5025E60 /* OnboardingFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA90B66882DE14610564958 /* OnboardingFlowView.swift */; };
+		F0287E43DE7C8409A4B9A26B /* BiquadFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F96221B99BBBAD07E72F512 /* BiquadFilter.swift */; };
+		F22D46916A2B63D8160F9F35 /* HonestyPledgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FE26B64C258C4CCFB17BA8 /* HonestyPledgeView.swift */; };
+		F468D990F949B5F80CEB8E55 /* Preprocessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8F1F5E0910B12291EEE18D /* Preprocessor.swift */; };
+		F6A6F67988D5BB87F4A5AFA8 /* PreviewAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E07904785BCAE243C7345987 /* PreviewAssets.xcassets */; };
+		F8CC894BC5FF458FB5CCE186 /* Font+Tokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD78545B2D9BFF41A09B01E1 /* Font+Tokens.swift */; };
+		FC168245C7008409E0A7CB26 /* IMUFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3406AC212CA3C9BD1B607B7 /* IMUFrame.swift */; };
+		FE08C9741D0EDC10EA482E12 /* OnboardingHowItWorksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1F05E3122F741179C3C4F9 /* OnboardingHowItWorksView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3E6E35FDF9C758708084DD7A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7FF9FDA05B6EE90A6634411B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 705B5A5B47721589FCC91ADB;
+			remoteInfo = ChewCoach;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0C9210052D2556F689D5B2BF /* UserPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferences.swift; sourceTree = "<group>"; };
+		1308E0D0420CF5E93746B939 /* ComfortReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComfortReport.swift; sourceTree = "<group>"; };
+		15E912408AFBD416A671C356 /* LiveMotionStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveMotionStream.swift; sourceTree = "<group>"; };
+		1607600414F1C9DE10BBC667 /* WeeklyRecapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyRecapView.swift; sourceTree = "<group>"; };
+		16DBAF21874900CD1E1AC341 /* MessageLibraryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageLibraryTests.swift; sourceTree = "<group>"; };
+		199A0CE48A8420CA98EC76B3 /* OnboardingPersonaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPersonaView.swift; sourceTree = "<group>"; };
+		19DF59C01A0F670143040F84 /* ChewCoach.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = ChewCoach.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		19E1BFC1D50389B56D041055 /* MealStartConfirmationSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealStartConfirmationSheet.swift; sourceTree = "<group>"; };
+		20C74424860A0D80C84FAE1D /* MockMotionStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMotionStream.swift; sourceTree = "<group>"; };
+		288256835569502583D03BE1 /* InsightGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsightGenerator.swift; sourceTree = "<group>"; };
+		290B4D2C779E3A04F5B4EC29 /* MessageRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageRenderer.swift; sourceTree = "<group>"; };
+		29B21265D64224BBC3AA73B1 /* MealRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealRepositoryTests.swift; sourceTree = "<group>"; };
+		2A90AEBB93D2F817C2F219AE /* OnboardingMotionPermissionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingMotionPermissionView.swift; sourceTree = "<group>"; };
+		2F1F05E3122F741179C3C4F9 /* OnboardingHowItWorksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingHowItWorksView.swift; sourceTree = "<group>"; };
+		2F96221B99BBBAD07E72F512 /* BiquadFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiquadFilter.swift; sourceTree = "<group>"; };
+		302C098AB3E6F7E7755360A5 /* ChewDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChewDetector.swift; sourceTree = "<group>"; };
+		32758EDAD7D2E9612D0C6A52 /* Color+Tokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Tokens.swift"; sourceTree = "<group>"; };
+		336EE6FC43B50CF4CDE82034 /* MealRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealRepository.swift; sourceTree = "<group>"; };
+		37BBC5FF77400992BA9F633A /* OnboardingFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFlow.swift; sourceTree = "<group>"; };
+		3A479298BE17520F359C54AE /* DashboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModel.swift; sourceTree = "<group>"; };
+		3CA90B66882DE14610564958 /* OnboardingFlowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFlowView.swift; sourceTree = "<group>"; };
+		3F7437053B72F016B0816205 /* ChewDetectorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChewDetectorTests.swift; sourceTree = "<group>"; };
+		460CA6FAA057515D6AAA4F1D /* CoachingContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachingContext.swift; sourceTree = "<group>"; };
+		4693D2D241678D2C5244F713 /* MealSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealSession.swift; sourceTree = "<group>"; };
+		5499AF9862A2DE8D8E203919 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
+		5752380ABE66A77BB54D11A3 /* SignalTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalTypes.swift; sourceTree = "<group>"; };
+		5B528A93587899246AF9DEE7 /* DetectorConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectorConstants.swift; sourceTree = "<group>"; };
+		6665D1A496EB1982D5152800 /* MessagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagePicker.swift; sourceTree = "<group>"; };
+		69CE88353C4A1B05891758D0 /* PermissionCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionCoordinator.swift; sourceTree = "<group>"; };
+		6C0562BCDAB35EC9CA93751D /* CalibrationEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalibrationEngineTests.swift; sourceTree = "<group>"; };
+		6F7ADBF15663C8A34C68E2F2 /* OnboardingWelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingWelcomeView.swift; sourceTree = "<group>"; };
+		757C18DAC58E8844F7CF08E6 /* UserCalibration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCalibration.swift; sourceTree = "<group>"; };
+		799EAF99CEA6B376D3A0D025 /* TriggerEvaluator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerEvaluator.swift; sourceTree = "<group>"; };
+		831E6A70BAE6B814F8BE874D /* MessageLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageLibrary.swift; sourceTree = "<group>"; };
+		831E998D7D74B3F233BE1C02 /* ActiveMealView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveMealView.swift; sourceTree = "<group>"; };
+		84DE810805357A1FF19C89AE /* ChewSample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChewSample.swift; sourceTree = "<group>"; };
+		84FE26B64C258C4CCFB17BA8 /* HonestyPledgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HonestyPledgeView.swift; sourceTree = "<group>"; };
+		860BC1FC6BB105A62EFD5066 /* PostHocAnalyzer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostHocAnalyzer.swift; sourceTree = "<group>"; };
+		86E47F0652A4BF43705D6A71 /* TodayHeaderCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayHeaderCard.swift; sourceTree = "<group>"; };
+		8E8F1F5E0910B12291EEE18D /* Preprocessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preprocessor.swift; sourceTree = "<group>"; };
+		91A193A1868EFBA00943F34C /* ChewCoachTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = ChewCoachTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9A18E272E0C0C9D2805CC305 /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
+		9A6B4E89607E9FB1B5B21580 /* IMUFrameBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMUFrameBuffer.swift; sourceTree = "<group>"; };
+		9CDFF95D6064BDB740468A76 /* CoachingMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachingMessage.swift; sourceTree = "<group>"; };
+		9FDAA4D763D28275BB3F573B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		9FF3D2A25E0F5490577E9BA8 /* Motion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Motion.swift; sourceTree = "<group>"; };
+		A20B48DE753E580E0CB92F2B /* MealResultCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealResultCard.swift; sourceTree = "<group>"; };
+		A90D4A42DD4AA1A0DC4D034A /* MealDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealDetailView.swift; sourceTree = "<group>"; };
+		AC8D2A4471805BFFAFEF752D /* ArtifactFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtifactFilter.swift; sourceTree = "<group>"; };
+		ADB5EABE6623B1403EC8F422 /* PatternEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternEngine.swift; sourceTree = "<group>"; };
+		B16837396D66FF489AA687E5 /* DailyInsight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyInsight.swift; sourceTree = "<group>"; };
+		B19044A66FCEB580C70BF388 /* CalibrationEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalibrationEngine.swift; sourceTree = "<group>"; };
+		B6C1288E039B10991DFC0A6B /* KoreanParticle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KoreanParticle.swift; sourceTree = "<group>"; };
+		B766AF3D0232737853918DA3 /* RootRouterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootRouterView.swift; sourceTree = "<group>"; };
+		BD78545B2D9BFF41A09B01E1 /* Font+Tokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+Tokens.swift"; sourceTree = "<group>"; };
+		C3406AC212CA3C9BD1B607B7 /* IMUFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMUFrame.swift; sourceTree = "<group>"; };
+		C47AE281A38DDD44352B6050 /* MotionStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionStream.swift; sourceTree = "<group>"; };
+		C4C9C1F585D389CDD2BF6B39 /* IMUDataCollectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMUDataCollectionTests.swift; sourceTree = "<group>"; };
+		C7F93E93BF245E2CB39A9780 /* MealHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealHistoryView.swift; sourceTree = "<group>"; };
+		D9067A261DCA70E1F87F9E29 /* PersonaCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaCard.swift; sourceTree = "<group>"; };
+		DAC5F376EA7DBA666B2F23C8 /* MealSessionTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealSessionTracker.swift; sourceTree = "<group>"; };
+		DE5BF7DEF725882BD7117646 /* ActiveMealViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveMealViewModel.swift; sourceTree = "<group>"; };
+		DF4994100B322E3D0DD70BA8 /* ComfortSelfReportRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComfortSelfReportRow.swift; sourceTree = "<group>"; };
+		E07904785BCAE243C7345987 /* PreviewAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = PreviewAssets.xcassets; sourceTree = "<group>"; };
+		E69F37C68B6CB947C68721F8 /* ChewBreathBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChewBreathBadge.swift; sourceTree = "<group>"; };
+		E8523F744C8756C8213FE0D2 /* AudioSessionMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioSessionMonitor.swift; sourceTree = "<group>"; };
+		E9F8A01079A26EE4052238F1 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		EAB4948AAACADB2045268421 /* OnboardingCalibrationIntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCalibrationIntroView.swift; sourceTree = "<group>"; };
+		EF9BD60D5C0D7DAF35D44B17 /* Spacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spacing.swift; sourceTree = "<group>"; };
+		F05B2F2952BBF55AEA9C5473 /* InsightCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsightCard.swift; sourceTree = "<group>"; };
+		F3224D4E184E448E1D5FDFAB /* MealTrendChartCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealTrendChartCard.swift; sourceTree = "<group>"; };
+		F9A363584EF551BA634B847F /* ChewCoachApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChewCoachApp.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		034D960EEBC6B5C3FBC5AB5B /* WeeklyRecap */ = {
+			isa = PBXGroup;
+			children = (
+				1607600414F1C9DE10BBC667 /* WeeklyRecapView.swift */,
+			);
+			path = WeeklyRecap;
+			sourceTree = "<group>";
+		};
+		0A7E1FF0329FF4ABF3C30ED4 /* Detection */ = {
+			isa = PBXGroup;
+			children = (
+				AC8D2A4471805BFFAFEF752D /* ArtifactFilter.swift */,
+				2F96221B99BBBAD07E72F512 /* BiquadFilter.swift */,
+				302C098AB3E6F7E7755360A5 /* ChewDetector.swift */,
+				5B528A93587899246AF9DEE7 /* DetectorConstants.swift */,
+				9A6B4E89607E9FB1B5B21580 /* IMUFrameBuffer.swift */,
+				DAC5F376EA7DBA666B2F23C8 /* MealSessionTracker.swift */,
+				860BC1FC6BB105A62EFD5066 /* PostHocAnalyzer.swift */,
+				8E8F1F5E0910B12291EEE18D /* Preprocessor.swift */,
+				5752380ABE66A77BB54D11A3 /* SignalTypes.swift */,
+			);
+			path = Detection;
+			sourceTree = "<group>";
+		};
+		0B28D04D196D64999800DCBD /* Permissions */ = {
+			isa = PBXGroup;
+			children = (
+				69CE88353C4A1B05891758D0 /* PermissionCoordinator.swift */,
+			);
+			path = Permissions;
+			sourceTree = "<group>";
+		};
+		19830C0F87CFFC4A2AE3A944 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				9FDAA4D763D28275BB3F573B /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		19AA7C70339E6D3B64B2B901 /* AudioContext */ = {
+			isa = PBXGroup;
+			children = (
+				E8523F744C8756C8213FE0D2 /* AudioSessionMonitor.swift */,
+			);
+			path = AudioContext;
+			sourceTree = "<group>";
+		};
+		22318D4F3B233E800396B137 /* Calibration */ = {
+			isa = PBXGroup;
+			children = (
+				B19044A66FCEB580C70BF388 /* CalibrationEngine.swift */,
+			);
+			path = Calibration;
+			sourceTree = "<group>";
+		};
+		23A88066E4FD077BCB03FACD /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				2B67AC2925B1621745272D5C /* ActiveMeal */,
+				66DB8DF6C005024D20F6A395 /* Dashboard */,
+				F6822CD908D8F376298C4AF3 /* MealHistory */,
+				A6C188B89308DC81550E8E90 /* Onboarding */,
+				EB5653ABDB0CDE7560A21613 /* Settings */,
+				034D960EEBC6B5C3FBC5AB5B /* WeeklyRecap */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		2B67AC2925B1621745272D5C /* ActiveMeal */ = {
+			isa = PBXGroup;
+			children = (
+				831E998D7D74B3F233BE1C02 /* ActiveMealView.swift */,
+				DE5BF7DEF725882BD7117646 /* ActiveMealViewModel.swift */,
+			);
+			path = ActiveMeal;
+			sourceTree = "<group>";
+		};
+		3B8887D702AF17BA7B8DD42A /* ChewCoach */ = {
+			isa = PBXGroup;
+			children = (
+				EBD985C97BFE8281874D2551 /* App */,
+				553204DC8D10AA7490CE5F68 /* Core */,
+				23A88066E4FD077BCB03FACD /* Features */,
+				6DB23FAB19DE73E63B9356DA /* Preview Content */,
+				19830C0F87CFFC4A2AE3A944 /* Resources */,
+				A97F87AE852DCA38B33BE889 /* Shared */,
+			);
+			path = ChewCoach;
+			sourceTree = "<group>";
+		};
+		45F34484416FC63D495A6DFA /* ChewCoachTests */ = {
+			isa = PBXGroup;
+			children = (
+				6C0562BCDAB35EC9CA93751D /* CalibrationEngineTests.swift */,
+				3F7437053B72F016B0816205 /* ChewDetectorTests.swift */,
+				C4C9C1F585D389CDD2BF6B39 /* IMUDataCollectionTests.swift */,
+				29B21265D64224BBC3AA73B1 /* MealRepositoryTests.swift */,
+				16DBAF21874900CD1E1AC341 /* MessageLibraryTests.swift */,
+			);
+			path = ChewCoachTests;
+			sourceTree = "<group>";
+		};
+		5031863CB3CA11EB02B45EC3 /* Sensing */ = {
+			isa = PBXGroup;
+			children = (
+				15E912408AFBD416A671C356 /* LiveMotionStream.swift */,
+				20C74424860A0D80C84FAE1D /* MockMotionStream.swift */,
+				C47AE281A38DDD44352B6050 /* MotionStream.swift */,
+			);
+			path = Sensing;
+			sourceTree = "<group>";
+		};
+		511851D03FE42B38208885F9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				19DF59C01A0F670143040F84 /* ChewCoach.app */,
+				91A193A1868EFBA00943F34C /* ChewCoachTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		553204DC8D10AA7490CE5F68 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				19AA7C70339E6D3B64B2B901 /* AudioContext */,
+				22318D4F3B233E800396B137 /* Calibration */,
+				F14FD2AA06F25AB7A3CC529A /* Coaching */,
+				0A7E1FF0329FF4ABF3C30ED4 /* Detection */,
+				BA5E46B5C8DF6221484F8A96 /* Insights */,
+				0B28D04D196D64999800DCBD /* Permissions */,
+				5031863CB3CA11EB02B45EC3 /* Sensing */,
+				F0DBFC840190336CC2C4BA71 /* Storage */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		6038362E6996F29F325E6A83 /* DesignSystem */ = {
+			isa = PBXGroup;
+			children = (
+				32758EDAD7D2E9612D0C6A52 /* Color+Tokens.swift */,
+				BD78545B2D9BFF41A09B01E1 /* Font+Tokens.swift */,
+				9FF3D2A25E0F5490577E9BA8 /* Motion.swift */,
+				EF9BD60D5C0D7DAF35D44B17 /* Spacing.swift */,
+			);
+			path = DesignSystem;
+			sourceTree = "<group>";
+		};
+		66DB8DF6C005024D20F6A395 /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+				5499AF9862A2DE8D8E203919 /* DashboardView.swift */,
+				3A479298BE17520F359C54AE /* DashboardViewModel.swift */,
+				19E1BFC1D50389B56D041055 /* MealStartConfirmationSheet.swift */,
+			);
+			path = Dashboard;
+			sourceTree = "<group>";
+		};
+		6DB23FAB19DE73E63B9356DA /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				E07904785BCAE243C7345987 /* PreviewAssets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		8D3DA66F0B3274AA6FD5E170 = {
+			isa = PBXGroup;
+			children = (
+				3B8887D702AF17BA7B8DD42A /* ChewCoach */,
+				45F34484416FC63D495A6DFA /* ChewCoachTests */,
+				511851D03FE42B38208885F9 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		90F4E6FD0371519158162DE7 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				E69F37C68B6CB947C68721F8 /* ChewBreathBadge.swift */,
+				DF4994100B322E3D0DD70BA8 /* ComfortSelfReportRow.swift */,
+				F05B2F2952BBF55AEA9C5473 /* InsightCard.swift */,
+				A20B48DE753E580E0CB92F2B /* MealResultCard.swift */,
+				F3224D4E184E448E1D5FDFAB /* MealTrendChartCard.swift */,
+				D9067A261DCA70E1F87F9E29 /* PersonaCard.swift */,
+				86E47F0652A4BF43705D6A71 /* TodayHeaderCard.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		A6C188B89308DC81550E8E90 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				EAB4948AAACADB2045268421 /* OnboardingCalibrationIntroView.swift */,
+				37BBC5FF77400992BA9F633A /* OnboardingFlow.swift */,
+				3CA90B66882DE14610564958 /* OnboardingFlowView.swift */,
+				2F1F05E3122F741179C3C4F9 /* OnboardingHowItWorksView.swift */,
+				2A90AEBB93D2F817C2F219AE /* OnboardingMotionPermissionView.swift */,
+				199A0CE48A8420CA98EC76B3 /* OnboardingPersonaView.swift */,
+				6F7ADBF15663C8A34C68E2F2 /* OnboardingWelcomeView.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		A97F87AE852DCA38B33BE889 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				90F4E6FD0371519158162DE7 /* Components */,
+				6038362E6996F29F325E6A83 /* DesignSystem */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		BA5E46B5C8DF6221484F8A96 /* Insights */ = {
+			isa = PBXGroup;
+			children = (
+				288256835569502583D03BE1 /* InsightGenerator.swift */,
+			);
+			path = Insights;
+			sourceTree = "<group>";
+		};
+		EB5653ABDB0CDE7560A21613 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				84FE26B64C258C4CCFB17BA8 /* HonestyPledgeView.swift */,
+				E9F8A01079A26EE4052238F1 /* SettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		EBD985C97BFE8281874D2551 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				9A18E272E0C0C9D2805CC305 /* AppEnvironment.swift */,
+				F9A363584EF551BA634B847F /* ChewCoachApp.swift */,
+				B766AF3D0232737853918DA3 /* RootRouterView.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		F0DBFC840190336CC2C4BA71 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				84DE810805357A1FF19C89AE /* ChewSample.swift */,
+				1308E0D0420CF5E93746B939 /* ComfortReport.swift */,
+				B16837396D66FF489AA687E5 /* DailyInsight.swift */,
+				C3406AC212CA3C9BD1B607B7 /* IMUFrame.swift */,
+				336EE6FC43B50CF4CDE82034 /* MealRepository.swift */,
+				4693D2D241678D2C5244F713 /* MealSession.swift */,
+				757C18DAC58E8844F7CF08E6 /* UserCalibration.swift */,
+				0C9210052D2556F689D5B2BF /* UserPreferences.swift */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
+		F14FD2AA06F25AB7A3CC529A /* Coaching */ = {
+			isa = PBXGroup;
+			children = (
+				460CA6FAA057515D6AAA4F1D /* CoachingContext.swift */,
+				9CDFF95D6064BDB740468A76 /* CoachingMessage.swift */,
+				B6C1288E039B10991DFC0A6B /* KoreanParticle.swift */,
+				831E6A70BAE6B814F8BE874D /* MessageLibrary.swift */,
+				6665D1A496EB1982D5152800 /* MessagePicker.swift */,
+				290B4D2C779E3A04F5B4EC29 /* MessageRenderer.swift */,
+				ADB5EABE6623B1403EC8F422 /* PatternEngine.swift */,
+				799EAF99CEA6B376D3A0D025 /* TriggerEvaluator.swift */,
+			);
+			path = Coaching;
+			sourceTree = "<group>";
+		};
+		F6822CD908D8F376298C4AF3 /* MealHistory */ = {
+			isa = PBXGroup;
+			children = (
+				A90D4A42DD4AA1A0DC4D034A /* MealDetailView.swift */,
+				C7F93E93BF245E2CB39A9780 /* MealHistoryView.swift */,
+			);
+			path = MealHistory;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0192FE4BA17C9C52710A4C75 /* ChewCoachTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8B929A18C3191738E09B537D /* Build configuration list for PBXNativeTarget "ChewCoachTests" */;
+			buildPhases = (
+				9ACEDCD9130D39379EF86C17 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B533E6853024F11B940D524A /* PBXTargetDependency */,
+			);
+			name = ChewCoachTests;
+			packageProductDependencies = (
+			);
+			productName = ChewCoachTests;
+			productReference = 91A193A1868EFBA00943F34C /* ChewCoachTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		705B5A5B47721589FCC91ADB /* ChewCoach */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 77480DC54588C9C85DB01D1B /* Build configuration list for PBXNativeTarget "ChewCoach" */;
+			buildPhases = (
+				6C705A384FA31ED993ADEE99 /* Sources */,
+				40E1126CC996D788572917B8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ChewCoach;
+			packageProductDependencies = (
+			);
+			productName = ChewCoach;
+			productReference = 19DF59C01A0F670143040F84 /* ChewCoach.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7FF9FDA05B6EE90A6634411B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					0192FE4BA17C9C52710A4C75 = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+					705B5A5B47721589FCC91ADB = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = AE75EE92B6422DE5F05C2820 /* Build configuration list for PBXProject "ChewCoach" */;
+			developmentRegion = ko;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				ko,
+			);
+			mainGroup = 8D3DA66F0B3274AA6FD5E170;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 511851D03FE42B38208885F9 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				705B5A5B47721589FCC91ADB /* ChewCoach */,
+				0192FE4BA17C9C52710A4C75 /* ChewCoachTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		40E1126CC996D788572917B8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				58EBB1158F9A5A1BFBD8F05D /* Assets.xcassets in Resources */,
+				F6A6F67988D5BB87F4A5AFA8 /* PreviewAssets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6C705A384FA31ED993ADEE99 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D7362DFE9B8A610205081638 /* ActiveMealView.swift in Sources */,
+				E2A0C6E06D1BB6E4F4802075 /* ActiveMealViewModel.swift in Sources */,
+				7B3889115062E4B3C944B2CB /* AppEnvironment.swift in Sources */,
+				E13F831D8F61A27F4597B7D5 /* ArtifactFilter.swift in Sources */,
+				E890F5BCDA668E13173DCC0D /* AudioSessionMonitor.swift in Sources */,
+				F0287E43DE7C8409A4B9A26B /* BiquadFilter.swift in Sources */,
+				30E9F42DE8812EA6F90A7F9C /* CalibrationEngine.swift in Sources */,
+				82BE71006951C4532B24E4C8 /* ChewBreathBadge.swift in Sources */,
+				26FA3694928EF759462DAADA /* ChewCoachApp.swift in Sources */,
+				345475D635FEC372528299A3 /* ChewDetector.swift in Sources */,
+				858077FDA9B120AD617AFE64 /* ChewSample.swift in Sources */,
+				DCC3041E6E639A79356707C7 /* CoachingContext.swift in Sources */,
+				AF7239D8CAF36BB97EF3B602 /* CoachingMessage.swift in Sources */,
+				23A592C2FDC881F9489DAE4E /* Color+Tokens.swift in Sources */,
+				451D1D50728BE39A0153D697 /* ComfortReport.swift in Sources */,
+				80A98F84478669F4C8BC3BDD /* ComfortSelfReportRow.swift in Sources */,
+				044B8564CC0BB41F9340CADE /* DailyInsight.swift in Sources */,
+				A0716395B7B1FA52C4E150C5 /* DashboardView.swift in Sources */,
+				E1D9D4AEE7BECE110FBD87A8 /* DashboardViewModel.swift in Sources */,
+				90B8BC915AEDDF22FEF8E071 /* DetectorConstants.swift in Sources */,
+				F8CC894BC5FF458FB5CCE186 /* Font+Tokens.swift in Sources */,
+				F22D46916A2B63D8160F9F35 /* HonestyPledgeView.swift in Sources */,
+				FC168245C7008409E0A7CB26 /* IMUFrame.swift in Sources */,
+				2FC6F4E633FAF12BEFBF4388 /* IMUFrameBuffer.swift in Sources */,
+				53D358EA8C6E64C1CE737586 /* InsightCard.swift in Sources */,
+				A6A9A3CE97F5D6C19E56D226 /* InsightGenerator.swift in Sources */,
+				2A039E45BD5A51FCA7B427C8 /* KoreanParticle.swift in Sources */,
+				582D117FF3E694599154FD67 /* LiveMotionStream.swift in Sources */,
+				C0E0B5E4E93AD33427FE9FF5 /* MealDetailView.swift in Sources */,
+				D6DBF50B89C43BF4BDF07AB9 /* MealHistoryView.swift in Sources */,
+				EA81D85A6EA8E95255393E83 /* MealRepository.swift in Sources */,
+				CAE4E3C55C231E0A066A8217 /* MealResultCard.swift in Sources */,
+				75EB82345FE33ADD352B890E /* MealSession.swift in Sources */,
+				61A8664E2AD6213EE78FBD13 /* MealSessionTracker.swift in Sources */,
+				B6572941C8AC851F9E554805 /* MealStartConfirmationSheet.swift in Sources */,
+				57E9C719C6D707633C2A1835 /* MealTrendChartCard.swift in Sources */,
+				3B52CBD90DA478B2611FE2C0 /* MessageLibrary.swift in Sources */,
+				20AAD70854F92B181ABA38E0 /* MessagePicker.swift in Sources */,
+				AA7211B35BAB98C0D3399A30 /* MessageRenderer.swift in Sources */,
+				8DA0C9F7EE1CAD137941052D /* MockMotionStream.swift in Sources */,
+				4102B8B85B6606BEBD0E1C65 /* Motion.swift in Sources */,
+				80F6DB84C829BC322960F226 /* MotionStream.swift in Sources */,
+				3B2E50A0DE54F4DEBC77104C /* OnboardingCalibrationIntroView.swift in Sources */,
+				D8ABDDEE6175D93B59E16D64 /* OnboardingFlow.swift in Sources */,
+				EC879F80F232B11BC5025E60 /* OnboardingFlowView.swift in Sources */,
+				FE08C9741D0EDC10EA482E12 /* OnboardingHowItWorksView.swift in Sources */,
+				D1B572E7E41762973CE4D3B4 /* OnboardingMotionPermissionView.swift in Sources */,
+				73BD3D7160C63EA45F92D292 /* OnboardingPersonaView.swift in Sources */,
+				E492051B011C97D7AD30E590 /* OnboardingWelcomeView.swift in Sources */,
+				3DDEC5615650B68488D4303A /* PatternEngine.swift in Sources */,
+				EBB38BD9C6142E820D1DD3C1 /* PermissionCoordinator.swift in Sources */,
+				0BDCB42322F41F2F427B6A18 /* PersonaCard.swift in Sources */,
+				E4001DA5053CA02E9A31598C /* PostHocAnalyzer.swift in Sources */,
+				F468D990F949B5F80CEB8E55 /* Preprocessor.swift in Sources */,
+				D9B47FA73F092830AA41787C /* RootRouterView.swift in Sources */,
+				9BE6C0484660780DDB08B427 /* SettingsView.swift in Sources */,
+				94B8948E4CFFCF0184B0FB61 /* SignalTypes.swift in Sources */,
+				7EE00C3C0BE17E8425A916D8 /* Spacing.swift in Sources */,
+				4920367CDA4E3C0B4BD88F59 /* TodayHeaderCard.swift in Sources */,
+				0AA9530E969C6D07DA6FAC4E /* TriggerEvaluator.swift in Sources */,
+				1ADE5D789F7D7C4FAB736C5C /* UserCalibration.swift in Sources */,
+				E5F4E1F561E5B29B7671C39E /* UserPreferences.swift in Sources */,
+				5481266679C8485AD079DBD4 /* WeeklyRecapView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9ACEDCD9130D39379EF86C17 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				531830E51801BEC05B70260F /* CalibrationEngineTests.swift in Sources */,
+				3328492F28B745B77A7CB054 /* ChewDetectorTests.swift in Sources */,
+				9180781EC3593D6078706BE3 /* IMUDataCollectionTests.swift in Sources */,
+				44D2048F5826FA3DD7B4E908 /* MealRepositoryTests.swift in Sources */,
+				1F74A61FE7712A5C4E440BFD /* MessageLibraryTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B533E6853024F11B940D524A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 705B5A5B47721589FCC91ADB /* ChewCoach */;
+			targetProxy = 3E6E35FDF9C758708084DD7A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		10D2C2555B937287039AAFD4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGNING_REQUIRED = NO;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 5.9;
+			};
+			name = Debug;
+		};
+		10E720B383AB23F6245FC236 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_ASSET_PATHS = "\"ChewCoach/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Chew Coach";
+				INFOPLIST_KEY_NSMotionUsageDescription = "AirPods 모션으로 식사 시작·끝을 자동으로 살펴봐요. 데이터는 기기 내에서만 처리됩니다.";
+				INFOPLIST_KEY_UIBackgroundModes = audio;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.chewcoach.app;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		175A5DC15B4356E79F0DC4BB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.chewcoach.app.tests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ChewCoach.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ChewCoach";
+			};
+			name = Debug;
+		};
+		2988129B1DAA3FF3D8BD1C41 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGNING_REQUIRED = NO;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 5.9;
+			};
+			name = Release;
+		};
+		8F90736EE635625C3DB28F93 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_ASSET_PATHS = "\"ChewCoach/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Chew Coach";
+				INFOPLIST_KEY_NSMotionUsageDescription = "AirPods 모션으로 식사 시작·끝을 자동으로 살펴봐요. 데이터는 기기 내에서만 처리됩니다.";
+				INFOPLIST_KEY_UIBackgroundModes = audio;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.chewcoach.app;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		C14332D702F998EA3F9C57D3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.chewcoach.app.tests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ChewCoach.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ChewCoach";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		77480DC54588C9C85DB01D1B /* Build configuration list for PBXNativeTarget "ChewCoach" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8F90736EE635625C3DB28F93 /* Debug */,
+				10E720B383AB23F6245FC236 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		8B929A18C3191738E09B537D /* Build configuration list for PBXNativeTarget "ChewCoachTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				175A5DC15B4356E79F0DC4BB /* Debug */,
+				C14332D702F998EA3F9C57D3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		AE75EE92B6422DE5F05C2820 /* Build configuration list for PBXProject "ChewCoach" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				10D2C2555B937287039AAFD4 /* Debug */,
+				2988129B1DAA3FF3D8BD1C41 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 7FF9FDA05B6EE90A6634411B /* Project object */;
+}

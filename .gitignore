@@ -20,3 +20,19 @@ landing/dist-ssr/
 
 # Claude Code internal
 .claude-task-cache/
+
+# Xcode build artifacts
+app/build/
+DerivedData/
+**/xcuserdata/
+**/*.xcuserstate
+**/.swiftpm/
+*.hmap
+*.xcresult
+
+# Workspace prev backups (이전 라운드 백업)
+_workspace/_app_prev_*/
+_workspace/_app_code_prev_*/
+_workspace/_landing_prev_*/
+_workspace/_landing_code_prev_*/
+_workspace/_prev_*/
