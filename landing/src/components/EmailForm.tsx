@@ -1,8 +1,16 @@
 import { useState, type FormEvent } from 'react'
 import { Mail, ArrowRight, Check } from 'lucide-react'
 import { cn } from '../lib/cn'
+import { submitEmail, type SubmitReason } from '../lib/dataCollection'
 
 type Variant = 'inline' | 'stacked' | 'caption'
+
+const ERROR_COPY: Record<SubmitReason, string> = {
+  invalid: '이메일 주소 형식을 확인해주세요.',
+  network: '전송에 실패했어요. 잠시 후 다시 시도해주세요.',
+  'rate-limit': '요청이 많아 잠시 쉬어가요. 1분 뒤 다시 시도해주세요.',
+  config: '전송 설정에 문제가 있어요. 잠시 후 다시 시도해주세요.',
+}
 
 export function EmailForm({
   variant = 'inline',
@@ -16,25 +24,40 @@ export function EmailForm({
   helperText?: string
 }) {
   const [email, setEmail] = useState('')
+  const [gotcha, setGotcha] = useState('')
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
+  const [errorReason, setErrorReason] = useState<SubmitReason>('invalid')
   const [shake, setShake] = useState(false)
 
   const isCaption = variant === 'caption'
 
-  function handleSubmit(e: FormEvent) {
+  async function handleSubmit(e: FormEvent) {
     e.preventDefault()
+
+    // 1차 클라이언트 검증 — 빠른 피드백
     if (!email.includes('@') || !email.includes('.')) {
+      setErrorReason('invalid')
       setStatus('error')
       setShake(true)
       setTimeout(() => setShake(false), 400)
       return
     }
+
     setStatus('submitting')
-    // placeholder — 실제 백엔드 연결 전
-    setTimeout(() => {
+    const result = await submitEmail({ email, source: variant, _gotcha: gotcha })
+
+    if (result.ok) {
       setStatus('success')
+      // 분석 라인 — 성공 시에만
       console.log('[track] beta_signup', { email, variant })
-    }, 700)
+      return
+    }
+
+    // 에러 분기 — reason별 메시지 분리
+    setErrorReason(result.reason)
+    setStatus('error')
+    setShake(true)
+    setTimeout(() => setShake(false), 400)
   }
 
   if (status === 'success') {
@@ -57,6 +80,24 @@ export function EmailForm({
       )}
       aria-describedby="email-helper"
     >
+      {/* honeypot — 봇이 채우면 차단. 시각적·접근성 트리에서 숨김 */}
+      <input
+        type="text"
+        name="_gotcha"
+        tabIndex={-1}
+        aria-hidden="true"
+        autoComplete="off"
+        value={gotcha}
+        onChange={(e) => setGotcha(e.target.value)}
+        style={{
+          position: 'absolute',
+          left: '-9999px',
+          width: '1px',
+          height: '1px',
+          opacity: 0,
+          pointerEvents: 'none',
+        }}
+      />
       <div
         className={cn(
           variant === 'inline'
@@ -121,7 +162,7 @@ export function EmailForm({
       )}
       {status === 'error' && (
         <p className="text-caption text-error" role="alert">
-          이메일 주소 형식을 확인해주세요.
+          {ERROR_COPY[errorReason]}
         </p>
       )}
     </form>

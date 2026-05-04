@@ -34,6 +34,7 @@ Phase별 특성이 다르므로 하이브리드:
    - "디자인만 수정" → visual-experience-designer + landing-architect → frontend-implementer → QA
    - "QA만 다시" → landing-qa-polisher만
    - "특정 섹션 다시" → 해당 섹션 카피·디자인·구현 재호출
+   - "이메일 수집", "폼 백엔드", "데이터 수집 추가", "노션/구글시트 연결" → Phase 4 (데이터 수집 통합) 단독 실행
    - 기존 산출물 미존재 → 초기 실행
 ```
 
@@ -45,6 +46,7 @@ Phase별 특성이 다르므로 하이브리드:
 | "특정 섹션 다시" | 3명 팀 모두 (해당 섹션만) → frontend-implementer → landing-qa-polisher |
 | "QA·폴리시 더" | landing-qa-polisher만 (필요 시 frontend-implementer 재호출) |
 | "성능만" | landing-architect (예산 재검토) → frontend-implementer (최적화) → landing-qa-polisher |
+| "이메일 수집·폼 백엔드 추가" | landing-data-collector (단독, Phase 4 모드) → 필요 시 marketing-storyteller (성공 메시지 카피) → landing-qa-polisher (폼 종단간 검수) |
 
 새 실행 시:
 ```bash
@@ -120,6 +122,29 @@ QA가 Critical 이슈 발견 시:
 - 직접 수정 가능 → 직접 수정 후 재검증
 - 구현자 재작업 필요 → frontend-implementer 1회 재호출
 - 디자인·카피 팀 재작업 필요 → 사용자에게 보고 후 Phase 1 부분 재실행 결정
+
+## Phase 4: 데이터 수집 통합 — 서브 에이전트 (후속·독립 모드)
+
+**실행 모드: 서브 에이전트 (단독)**
+
+랜딩 사이트가 이미 빌드된 후, *백엔드 없이* 사용자 데이터(이메일·웨이트리스트·피드백)를 수집하는 통합을 추가하는 후속 모드. Phase 1~3와 직교하며 단독으로 트리거 가능.
+
+```
+Agent({
+  description: "백엔드리스 데이터 수집 통합",
+  subagent_type: "general-purpose",
+  model: "opus",
+  prompt: "당신은 .claude/agents/landing-data-collector.md 에이전트다. .claude/skills/landing-data-collection/SKILL.md의 5축 비교 매트릭스(키 노출·CORS·무료 한도·운영 부하·가시성)를 따른다. 입력: landing/src/components/EmailForm.tsx + 사용자 요청(수집 목적·예상 트래픽·통지 채널·수신처 선호: 노션/구글시트/Formspree 등). 단계: (1) _workspace/landing/07_data_collection_options.md에 옵션 비교·추천 작성 → 사용자 승인 대기 → (2) 선택된 옵션 구현 (EmailForm.tsx + 필요 시 lib/dataCollection.ts + .env.example) → (3) 종단간 1건 제출 검증 + 스크린샷 → (4) _workspace/landing/08_data_collection_runbook.md 운영 가이드. 빌드 통과 + 클라이언트 번들에 비밀 0건 + 옵션 G 톤 카피 필수."
+})
+```
+
+Phase 4 진입 조건:
+- `landing/` 디렉토리와 `EmailForm.tsx`가 이미 존재
+- 사용자 요청이 데이터 수집 추가 (`이메일 수집 / 폼 백엔드 / 노션·구글시트 연결 / 웨이트리스트` 등)
+
+Phase 4 종료 후 권장 후속:
+- `landing-qa-polisher` 폼 종단간 검수 (Phase 3 부분 재실행)
+- 성공 메시지 카피가 변경됐다면 `marketing-storyteller`에게 톤 일관성 검토 요청
 
 ## 데이터 전달 프로토콜
 
@@ -209,6 +234,7 @@ Phase 1 팀 모드에서는 추가로:
 | "QA만 다시", "폴리시 더" | 검수만 | landing-qa-polisher만 |
 | "성능 개선", "Lighthouse 통과" | 성능 라운드 | architect → implementer → QA |
 | "옵션 F로 피벗" | 컨셉 자체 변경 | 디스커버리 결과 변경 — 큰 변경 안내 후 진행 |
+| "이메일 수집", "폼 백엔드", "노션 연결", "구글시트 연결", "웨이트리스트", "Formspree" | 데이터 수집 통합 | Phase 4 단독 (landing-data-collector) |
 | "배포해줘", "Vercel 올려줘" | 배포 | vercel:deploy 스킬로 위임 (이 오케스트레이터 외) |
 
 오케스트레이터 우회하여 개별 에이전트를 직접 호출하지 않는다. 사용자가 그렇게 요청해도, 이 오케스트레이터가 적절한 모드로 분기하는 게 맞다.
