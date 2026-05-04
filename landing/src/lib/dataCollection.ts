@@ -1,103 +1,112 @@
 // landing/src/lib/dataCollection.ts
 //
-// Web3Forms 통합 — 백엔드 없는 이메일 수집.
+// Supabase 통합 — 옵션 G 베타 신청 영구 저장.
 //
-// 보안 모델:
-//   - VITE_W3FORMS_KEY는 빌드 시 클라이언트 번들에 인라인된다 (Vite VITE_* 규칙).
-//   - 이 키는 *해당 폼에 데이터를 push하는 권한만* 갖는다 — 다른 데이터를 읽을 수 없다.
-//   - 따라서 노출은 안전. 단 봇이 직접 endpoint를 칠 수 있으므로 honeypot으로 방어.
+// 본 라운드 (Phase 5-B-4) 마이그: Web3Forms 호출 *완전 제거* → Supabase upsert.
+//   - 마이그 패스 B (즉시 컷오버) — 12_supabase_schema.md §6 권장.
+//   - VITE_W3FORMS_KEY 의존성 제거.
+//   - 보안 모델: anon 키만 (RLS 정책과 한 세트). service_role 절대 X.
 //
-// 운영 가이드: _workspace/landing/08_data_collection_runbook.md
+// 자세한 운영 가이드: _workspace/landing/12_supabase_schema.md, 08_data_collection_runbook.md
 
-const W3FORMS_ENDPOINT = 'https://api.web3forms.com/submit'
+import { supabase } from './supabaseClient'
+import type { Purpose } from '../data/copy/purpose'
 
-export type SubmitReason = 'rate-limit' | 'network' | 'invalid' | 'config'
+export type SubmitReason =
+  | 'invalid'
+  | 'network'
+  | 'rate-limit'
+  | 'config'
+  | 'consent_required'
 
-export type SubmitResult =
-  | { ok: true }
-  | { ok: false; reason: SubmitReason }
+export type SubmitResult = { ok: true } | { ok: false; reason: SubmitReason }
 
-export interface SubmitEmailPayload {
+export interface SubmitSignupPayload {
   email: string
-  source: string // 'inline' | 'stacked' | 'caption' 등 — EmailForm variant
-  /** honeypot — 봇이 채우면 차단. 정상 사용자에게는 안 보이는 필드 */
+  purpose: Purpose
+  consent_marketing: boolean
+  /** 옵트인 시 ISO timestamp, 거절 시 null */
+  consent_at: string | null
+  /** ISO date 약관 버전 (env.VITE_CONSENT_VERSION) */
+  consent_version: string
+  /** 폼 위치 — analytics source와 동일 enum */
+  source: string
+  /** sha256(email_lower + salt) — 옵트인 시만, 거절 시 null */
+  posthog_distinct_id: string | null
+  /** 방문자가 본 랜딩 variant (URL ?p= 라우팅) — 미주입 시 'unknown' */
+  persona?: string
+  /** honeypot — 봇 차단 (정상 사용자에게는 안 보이는 필드) */
   _gotcha?: string
 }
 
 /**
- * Web3Forms로 이메일 1건 제출.
+ * Supabase signups 테이블에 신청 1건 insert.
  *
  * 분기:
- *  - honeypot 채워짐 → { ok: true } (봇에는 성공처럼 보이게 — 분석 회피)
+ *  - honeypot 채워짐 → { ok: true } (봇에는 성공처럼 응답)
  *  - 이메일 형식·길이 위반 → { ok: false, reason: 'invalid' }
- *  - VITE_W3FORMS_KEY 미설정 → { ok: false, reason: 'config' } (개발자 신호)
- *  - HTTP 429 또는 Web3Forms 한도 초과 → { ok: false, reason: 'rate-limit' }
- *  - 그 외 네트워크/서버 오류 → { ok: false, reason: 'network' }
+ *  - Supabase 클라이언트 미설정 → { ok: false, reason: 'config' }
+ *  - PostgREST 23505 (unique violation) → { ok: true } (중복 이메일은 사용자에게 success)
+ *  - PostgREST 42501 (RLS deny) → { ok: false, reason: 'config' }
+ *  - 그 외 → { ok: false, reason: 'network' }
+ *
+ * 중복 처리: 23505는 사용자에게 성공 처리 — 같은 이메일이 다시 와도 성공으로 보임.
  */
-export async function submitEmail(payload: SubmitEmailPayload): Promise<SubmitResult> {
-  // 봇 차단 — honeypot이 채워졌으면 success처럼 응답 (하지만 실제 호출 X)
+export async function submitSignup(payload: SubmitSignupPayload): Promise<SubmitResult> {
+  // 봇 차단 — honeypot이 채워졌으면 success처럼 응답하되 실제 호출 X
   if (payload._gotcha && payload._gotcha.length > 0) {
     return { ok: true }
   }
 
   // 클라이언트 검증
   const email = payload.email.trim()
-  if (email.length < 5 || email.length > 200 || !email.includes('@')) {
+  if (email.length < 5 || email.length > 200 || !email.includes('@') || !email.includes('.')) {
     return { ok: false, reason: 'invalid' }
   }
 
-  const accessKey = import.meta.env.VITE_W3FORMS_KEY as string | undefined
-  if (!accessKey || accessKey.length === 0) {
-    // 개발 환경에서 디버깅 쉽게 — 프로덕션 빌드에서도 콘솔에는 한 번만 찍힘
-    console.warn(
-      '[dataCollection] VITE_W3FORMS_KEY is not set. ' +
-        'Set it in landing/.env (local) or GitHub repo Secrets (production). ' +
-        'See _workspace/landing/08_data_collection_runbook.md',
-    )
+  // Supabase 클라이언트 미설정 (env 누락) — silent disable + 사용자에게는 config 신호
+  if (!supabase) {
+    if (import.meta.env.DEV) {
+      console.warn(
+        '[dataCollection] Supabase client not initialized (env missing). ' +
+          'Set VITE_SUPABASE_URL + VITE_SUPABASE_ANON_KEY in landing/.env. ' +
+          'See _workspace/landing/13_data_v2_consolidated.md §6',
+      )
+    }
     return { ok: false, reason: 'config' }
   }
 
   try {
-    const res = await fetch(W3FORMS_ENDPOINT, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-      },
-      body: JSON.stringify({
-        access_key: accessKey,
+    const { error } = await supabase.from('signups').insert(
+      {
         email,
-        subject: '[Chew Coach] 새 베타 신청',
-        from_name: 'Chew Coach Landing',
+        purpose: payload.purpose,
+        // persona는 미지정 시 DB column default 'unknown'에 위임 (12.md §3.1)
+        ...(payload.persona ? { persona: payload.persona } : {}),
+        consent_marketing: payload.consent_marketing,
+        consent_at: payload.consent_at,
+        consent_version: payload.consent_version,
         source: payload.source,
-      }),
-    })
+        posthog_distinct_id: payload.posthog_distinct_id,
+        user_agent:
+          typeof navigator !== 'undefined' ? navigator.userAgent.slice(0, 500) : null,
+      },
+    )
 
-    if (res.status === 429) {
-      return { ok: false, reason: 'rate-limit' }
-    }
-    if (!res.ok) {
-      // Web3Forms는 한도 초과 시 401, 키 오류도 401로 응답할 수 있음.
-      // 사용자 입장에서는 "잠시 후 다시"로 통일 — rate-limit/network 둘 중 더 정확한 쪽으로.
-      if (res.status === 401 || res.status === 403) {
-        return { ok: false, reason: 'rate-limit' }
-      }
-      return { ok: false, reason: 'network' }
-    }
-
-    // Web3Forms 응답: { success: true, message: '...' } 또는 { success: false, message: '...' }
-    const data: unknown = await res.json().catch(() => null)
-    if (
-      data &&
-      typeof data === 'object' &&
-      'success' in data &&
-      (data as { success: unknown }).success === false
-    ) {
+    if (error) {
+      // PostgREST 에러 코드 매핑
+      // 23505 = unique violation (race 시) — upsert인데도 발생하면 사용자에게는 성공으로 처리
+      if (error.code === '23505') return { ok: true }
+      // 42501 = RLS 정책 deny (insufficient_privilege) — 정책 누락 / 잘못된 키
+      if (error.code === '42501') return { ok: false, reason: 'config' }
+      // 23514 = check constraint (예: consent_marketing=true인데 consent_at=null) → consent_required
+      if (error.code === '23514') return { ok: false, reason: 'consent_required' }
       return { ok: false, reason: 'network' }
     }
 
     return { ok: true }
-  } catch {
+  } catch (e) {
+    if (import.meta.env.DEV) console.warn('[dataCollection] submit failed:', e)
     return { ok: false, reason: 'network' }
   }
 }

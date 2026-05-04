@@ -1,8 +1,10 @@
+import { useEffect, useRef } from 'react'
 import { Check } from 'lucide-react'
 import { Section } from '../components/Section'
 import { Container } from '../components/Container'
 import { CtaPrimary } from '../components/CtaPrimary'
 import { cn } from '../lib/cn'
+import { track } from '../lib/analytics'
 
 type Tier = {
   key: string
@@ -63,7 +65,34 @@ const tiers: Tier[] = [
   },
 ]
 
+const TIER_TO_CTA_ID: Record<string, string> = {
+  monthly: 'pricing_monthly_cta',
+  yearly: 'pricing_yearly_cta',
+  single: 'pricing_single_cta',
+}
+
 export function Pricing() {
+  const sectionRef = useRef<HTMLElement | null>(null)
+
+  useEffect(() => {
+    const el = document.getElementById('pricing')
+    if (!el) return
+    sectionRef.current = el as HTMLElement
+    let fired = false
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !fired) {
+          fired = true
+          track('pricing_view')
+          obs.disconnect()
+        }
+      },
+      { threshold: 0.5 },
+    )
+    obs.observe(el)
+    return () => obs.disconnect()
+  }, [])
+
   return (
     <Section tone="cool" paddingY="xl" id="pricing">
       <Container>
@@ -148,9 +177,16 @@ export function Pricing() {
                   label={tier.cta}
                   size="md"
                   href="#final-cta"
-                  onClick={() =>
+                  onClick={() => {
+                    track('cta_click', {
+                      cta_id: TIER_TO_CTA_ID[tier.key] ?? `pricing_card_${tier.key}`,
+                      source: 'pricing',
+                      target: 'scroll',
+                      section_id: 'pricing',
+                      tier_focus: tier.key,
+                    })
                     document.getElementById('final-cta')?.scrollIntoView({ behavior: 'smooth' })
-                  }
+                  }}
                   className={cn(!tier.recommended && 'bg-text-primary hover:bg-text-secondary')}
                 />
                 <p className="text-caption text-text-muted">{tier.cancelPolicy}</p>

@@ -4,6 +4,7 @@ import { ScrollIndicator } from '../components/ScrollIndicator'
 import { AirpodsSvg } from '../components/icons/AirpodsSvg'
 import { usePersonaRoute } from '../hooks/usePersonaRoute'
 import { personas } from '../data/personas'
+import { track } from '../lib/analytics'
 
 function smoothScrollTo(id: string) {
   document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
@@ -81,12 +82,30 @@ export function Hero() {
               <CtaPrimary
                 label="베타에 합류하기"
                 href="#final-cta"
-                onClick={() => smoothScrollTo('final-cta')}
+                onClick={() => {
+                  track('cta_click', {
+                    cta_id: 'hero_primary',
+                    source: 'hero',
+                    target: 'scroll',
+                    section_id: 'hero',
+                    persona,
+                  })
+                  smoothScrollTo('final-cta')
+                }}
               />
               <CtaSecondary
                 href="#airpods-demo"
                 label="어떻게 작동하는지 보기"
-                onClick={() => smoothScrollTo('airpods-demo')}
+                onClick={() => {
+                  track('cta_click', {
+                    cta_id: 'hero_secondary',
+                    source: 'hero',
+                    target: 'scroll',
+                    section_id: 'hero',
+                    persona,
+                  })
+                  smoothScrollTo('airpods-demo')
+                }}
               />
             </div>
 
