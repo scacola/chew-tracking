@@ -58,11 +58,10 @@ export function FinalCTA() {
               href="#pricing"
               onClick={(e) => {
                 e.preventDefault()
-                track('cta_click', {
+                track('cta_clicked', {
                   cta_id: 'final_cta_single_link',
-                  source: 'final_cta',
-                  target: 'scroll',
-                  section_id: 'final_cta',
+                  cta_text: '28일 코스 단품 19,900원',
+                  location: 'final_cta',
                 })
                 document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })
               }}

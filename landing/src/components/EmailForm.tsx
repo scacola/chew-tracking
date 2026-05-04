@@ -84,23 +84,25 @@ export function EmailForm({
 
   function handleFormSubmit(e: FormEvent) {
     e.preventDefault()
+    track('signup_submit_attempted', { source })
 
     // 1차 클라이언트 검증 — 빠른 피드백
     if (!email.includes('@') || !email.includes('.')) {
       setErrorReason('invalid')
       setStatus('error')
+      track('signup_submit_failed', { source, reason: 'invalid_email' })
       triggerShake()
       return
     }
     if (!purpose) {
       setPurposeError(true)
+      track('signup_submit_failed', { source, reason: 'purpose_missing' })
       triggerShake()
       return
     }
 
     // 2단계: ConsentDialog 띄우기
-    track('form_submit_try', { source, purpose, has_email: true })
-    track('consent_view', { consent_version: env.VITE_CONSENT_VERSION, source })
+    track('signup_dialog_opened', { source, purpose })
     setShowConsentDialog(true)
   }
 
@@ -118,13 +120,6 @@ export function EmailForm({
     if (consentMarketing && env.VITE_HASH_SALT) {
       try {
         posthogDistinctId = await hashEmail(email, env.VITE_HASH_SALT)
-        identify(posthogDistinctId, {
-          purpose: purpose ?? undefined,
-          consent_marketing: true,
-          consent_at: consentAt ?? undefined,
-          consent_version: env.VITE_CONSENT_VERSION,
-          persona,
-        })
       } catch {
         // hash/identify 실패해도 신청은 진행 — Supabase가 source of truth
       }
@@ -144,23 +139,30 @@ export function EmailForm({
 
     if (result.ok) {
       setStatus('success')
-      track('form_submit_success', {
+      if (consentMarketing && posthogDistinctId) {
+        identify(posthogDistinctId, {
+          email_hash: posthogDistinctId,
+          purpose: purpose ?? undefined,
+          consent_marketing: true,
+          consent_at: consentAt ?? undefined,
+          consent_version: env.VITE_CONSENT_VERSION,
+          persona,
+        })
+      }
+      track('signup_succeeded', {
         source,
         purpose: purpose ?? undefined,
         consent_marketing: consentMarketing,
-        consent_version: env.VITE_CONSENT_VERSION,
-        persona,
       })
       return
     }
 
     setErrorReason(result.reason)
     setStatus('error')
-    track('form_submit_fail', {
+    track('signup_submit_failed', {
       source,
       purpose: purpose ?? undefined,
-      error_reason: result.reason,
-      persona,
+      reason: result.reason,
     })
     triggerShake()
   }
@@ -196,6 +198,7 @@ export function EmailForm({
     <>
       <form
         onSubmit={handleFormSubmit}
+        noValidate
         className={cn(
           'w-full',
           variant === 'inline' && 'flex flex-col gap-3',
@@ -232,7 +235,7 @@ export function EmailForm({
           onChange={(p) => {
             setPurpose(p)
             setPurposeError(false)
-            track('purpose_select', { source, purpose: p })
+            track('purpose_selected', { source, purpose: p })
           }}
           copy={purposeCopy}
           hasError={purposeError}
@@ -262,7 +265,7 @@ export function EmailForm({
               data-ph-no-capture="true"
               onFocus={() => {
                 if (!focusFiredOnce.current) {
-                  track('email_focus', { source })
+                  track('email_input_focused', { source })
                   focusFiredOnce.current = true
                 }
               }}

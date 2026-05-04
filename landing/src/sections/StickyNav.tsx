@@ -52,11 +52,10 @@ export function StickyNav() {
               href={`#${target}`}
               onClick={(e) => {
                 e.preventDefault()
-                track('cta_click', {
+                track('cta_clicked', {
                   cta_id: NAV_TARGET_TO_CTA_ID[target] ?? `nav_${target}`,
-                  source: 'nav',
-                  target: 'scroll',
-                  section_id: target,
+                  cta_text: label,
+                  location: 'sticky_nav',
                 })
                 document.getElementById(target)?.scrollIntoView({ behavior: 'smooth' })
               }}
@@ -72,11 +71,10 @@ export function StickyNav() {
           size="md"
           href="#final-cta"
           onClick={() => {
-            track('cta_click', {
+            track('cta_clicked', {
               cta_id: 'nav_join',
-              source: 'nav',
-              target: 'scroll',
-              section_id: 'final_cta',
+              cta_text: '베타 합류',
+              location: 'sticky_nav',
             })
             document.getElementById('final-cta')?.scrollIntoView({ behavior: 'smooth' })
           }}

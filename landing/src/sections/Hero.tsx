@@ -83,12 +83,10 @@ export function Hero() {
                 label="베타에 합류하기"
                 href="#final-cta"
                 onClick={() => {
-                  track('cta_click', {
+                  track('cta_clicked', {
                     cta_id: 'hero_primary',
-                    source: 'hero',
-                    target: 'scroll',
-                    section_id: 'hero',
-                    persona,
+                    cta_text: '베타에 합류하기',
+                    location: 'hero',
                   })
                   smoothScrollTo('final-cta')
                 }}
@@ -97,12 +95,10 @@ export function Hero() {
                 href="#airpods-demo"
                 label="어떻게 작동하는지 보기"
                 onClick={() => {
-                  track('cta_click', {
+                  track('cta_clicked', {
                     cta_id: 'hero_secondary',
-                    source: 'hero',
-                    target: 'scroll',
-                    section_id: 'hero',
-                    persona,
+                    cta_text: '어떻게 작동하는지 보기',
+                    location: 'hero',
                   })
                   smoothScrollTo('airpods-demo')
                 }}

@@ -178,12 +178,10 @@ export function Pricing() {
                   size="md"
                   href="#final-cta"
                   onClick={() => {
-                    track('cta_click', {
+                    track('cta_clicked', {
                       cta_id: TIER_TO_CTA_ID[tier.key] ?? `pricing_card_${tier.key}`,
-                      source: 'pricing',
-                      target: 'scroll',
-                      section_id: 'pricing',
-                      tier_focus: tier.key,
+                      cta_text: tier.cta,
+                      location: 'pricing',
                     })
                     document.getElementById('final-cta')?.scrollIntoView({ behavior: 'smooth' })
                   }}

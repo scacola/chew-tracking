@@ -15,17 +15,25 @@ import { isPostHogEnabled } from './env'
 /** 이벤트 카탈로그 — 09_analytics_plan.md §2 표 그대로 */
 export type AnalyticsEvent =
   | 'landing_view'
+  | 'landing_page_viewed'
   | 'section_view'
   | 'cta_click'
+  | 'cta_clicked'
   | 'faq_open'
   | 'pricing_view'
   | 'email_focus'
+  | 'email_input_focused'
   | 'purpose_select'
+  | 'purpose_selected'
   | 'consent_view'
   | 'consent_dismiss'
   | 'form_submit_try'
   | 'form_submit_success'
   | 'form_submit_fail'
+  | 'signup_dialog_opened'
+  | 'signup_submit_attempted'
+  | 'signup_submit_failed'
+  | 'signup_succeeded'
 
 export type Purpose = 'diet' | 'digestion' | 'other'
 export type Source =
@@ -49,6 +57,8 @@ export interface BaseProps {
   consent_marketing?: boolean
   consent_version?: string
   cta_id?: string
+  cta_text?: string
+  location?: string
   target?: 'scroll' | 'form' | 'external'
   section_id?: string
   faq_id?: string
@@ -56,6 +66,8 @@ export interface BaseProps {
   tier_focus?: string
   has_email?: boolean
   error_reason?: string
+  reason?: string
+  error_category?: string
   path?: string
   referrer?: string
   utm_source?: string
@@ -63,6 +75,7 @@ export interface BaseProps {
   utm_campaign?: string
   persona?: string
   is_duplicate?: boolean
+  email_hash?: string
   /** 그 외 자유 — 새 차원은 09_analytics_plan.md §3에 등록 후 사용 */
   [k: string]: unknown
 }
@@ -81,6 +94,7 @@ export interface IdentifyTraits {
   consent_at?: string
   consent_version?: string
   persona?: string
+  email_hash?: string
 }
 
 /**

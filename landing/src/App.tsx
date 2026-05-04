@@ -14,24 +14,23 @@ import { Footer } from './sections/Footer'
 import { initRevealOnScroll } from './interactions/revealOnScroll'
 import { track } from './lib/analytics'
 
+let landingPageViewed = false
+
 function App() {
   useEffect(() => {
     const observer = initRevealOnScroll()
     return () => observer?.disconnect()
   }, [])
 
-  // landing_view — 1회 발화. UTM/persona/referrer 부속.
+  // landing_page_viewed — 1회 발화. path/referrer만 전송.
   useEffect(() => {
+    if (landingPageViewed) return
     if (typeof window === 'undefined') return
-    const params = new URLSearchParams(window.location.search)
-    const persona = (params.get('p') ?? 'unknown') as string
-    track('landing_view', {
+    landingPageViewed = true
+    track('landing_page_viewed', {
+      source: 'landing_page',
       path: window.location.pathname,
       referrer: document.referrer || undefined,
-      utm_source: params.get('utm_source') ?? undefined,
-      utm_medium: params.get('utm_medium') ?? undefined,
-      utm_campaign: params.get('utm_campaign') ?? undefined,
-      persona,
     })
   }, [])
 
