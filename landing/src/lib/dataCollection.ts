@@ -18,6 +18,8 @@ export type SubmitReason =
   | 'rate-limit'
   | 'config'
   | 'consent_required'
+  | 'consent_skew'
+  | 'unknown'
 
 export type SubmitResult = { ok: true } | { ok: false; reason: SubmitReason }
 
@@ -100,13 +102,21 @@ export async function submitSignup(payload: SubmitSignupPayload): Promise<Submit
       // 42501 = RLS 정책 deny (insufficient_privilege) — 정책 누락 / 잘못된 키
       if (error.code === '42501') return { ok: false, reason: 'config' }
       // 23514 = check constraint (예: consent_marketing=true인데 consent_at=null) → consent_required
-      if (error.code === '23514') return { ok: false, reason: 'consent_required' }
+      if (error.code === '23514') {
+        if (import.meta.env.DEV) {
+          console.warn('[dataCollection] consent_at constraint rejected:', error)
+        }
+        return { ok: false, reason: 'consent_skew' }
+      }
+      if (import.meta.env.DEV) {
+        console.warn('[dataCollection] unexpected supabase error:', error)
+      }
       return { ok: false, reason: 'network' }
     }
 
     return { ok: true }
   } catch (e) {
     if (import.meta.env.DEV) console.warn('[dataCollection] submit failed:', e)
-    return { ok: false, reason: 'network' }
+    return { ok: false, reason: 'unknown' }
   }
 }

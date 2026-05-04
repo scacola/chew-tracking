@@ -36,6 +36,8 @@ export type ErrorReasonKey =
   | 'rate-limit'
   | 'config'
   | 'consent_required'
+  | 'consent_skew'
+  | 'unknown'
 
 export type ErrorCopy = Record<ErrorReasonKey, string>
 
@@ -77,6 +79,8 @@ export const errorCopy: ErrorCopy = {
   'rate-limit': '요청이 많아 잠시 쉬어가요. 1분 뒤 다시 시도해주세요.',
   config: '전송 설정에 문제가 있어요. 잠시 후 다시 시도해주세요.',
   consent_required: '잠깐 문제가 있었어요. 다시 한 번 시도해주세요.',
+  consent_skew: '기기 시간에 차이가 있는 것 같아요. 시계를 맞춘 뒤 다시 시도해주세요.',
+  unknown: '전송 중 예기치 않은 문제가 있었어요. 잠시 후 다시 시도해주세요.',
 }
 
 export const consentMeta: ConsentMeta = {
