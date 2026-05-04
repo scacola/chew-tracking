@@ -1,6 +1,6 @@
 ---
 name: landing-data-collection
-description: 정적 호스팅(GitHub Pages·Vercel·Netlify·Cloudflare Pages 등) 랜딩 페이지에서 *백엔드 없이* 이메일·웨이트리스트·피드백을 수집하는 옵션 비교·보안 검토·구현·운영 가이드 방법론. 노션 API, 구글 스프레드시트, Formspree, Web3Forms, Getform, Tally, Basin, Resend, Loops, Buttondown, EmailOctopus, Beehiiv 등 모든 노코드/저코드 데이터 수집 옵션을 다룬다. "이메일 받게 해줘", "폼 백엔드", "웨이트리스트 받기", "백엔드 없이 데이터 수집", "노션으로 폼 받기", "구글시트 폼", "Formspree 연결", "이메일 수집 통합" 같은 요청에서 반드시 사용. 후속: "수신처 바꿔줘", "스팸 막아줘", "폼 운영 가이드 다시", "한도 늘려줘" 같은 표현에서도 트리거.
+description: 정적 호스팅(GitHub Pages·Vercel·Netlify·Cloudflare Pages 등) 랜딩 페이지에서 *백엔드 없이 또는 BaaS 기반으로* 이메일·웨이트리스트·피드백·사용자 목적·옵트인 컨센트를 수집하는 옵션 비교·스키마 설계·RLS·보안 검토·구현·운영 가이드 방법론. 노션 API, 구글 스프레드시트, Formspree, Web3Forms, Getform, Tally, Basin, Resend, Loops, Buttondown, EmailOctopus, Beehiiv 같은 가벼운 옵션 + Supabase, Firebase, Pocketbase 같은 BaaS 옵션을 모두 다룬다. "이메일 받게 해줘", "폼 백엔드", "웨이트리스트 받기", "백엔드 없이 데이터 수집", "노션으로 폼 받기", "구글시트 폼", "Formspree 연결", "Supabase 연결", "Supabase 백엔드", "데이터베이스로 받기", "옵트인 동의 추가", "마케팅 컨센트", "출시 시 연락 동의", "사용자 목적 수집", "다이어트/위염 분류" 같은 요청에서 반드시 사용. 후속: "수신처 바꿔줘", "Supabase로 마이그", "스팸 막아줘", "폼 운영 가이드 다시", "한도 늘려줘", "RLS 정책", "컨센트 추가" 같은 표현에서도 트리거.
 ---
 
 # Landing Data Collection — 백엔드리스 데이터 수집
@@ -35,6 +35,45 @@ CORS 차단은 의도된 보안 기능이다. 노션 공식 API(`api.notion.com`
 - 성공: "합류해주셔서 감사해요. 진행 소식을 보내드릴게요."
 - 확인 메일 제목: "[Chew Coach] 베타 합류 확인"
 - 본문: "지원해주셔서 감사해요. 베타 빌드가 준비되면 가장 먼저 알려드려요. 언제든 답장으로 의견 주셔도 좋아요." (의료 효과 약속 X, 출시 시점 단정 X)
+
+### 6. 컨센트는 데이터 모델로 박는다
+
+마케팅 옵트인은 *카피 한 줄*로 끝나지 않는다. DB에 다음 3개 컬럼이 *반드시* 존재해야 GDPR/PIPA 호환:
+
+| 컬럼 | 타입 | 의미 |
+|------|------|------|
+| `consent_marketing` | `boolean` | 출시 시 연락 동의 여부 |
+| `consent_at` | `timestamptz` | 동의한 시각 (UTC) |
+| `consent_version` | `text` | 동의 시점의 약관 버전 (예: `'2026-05-04'`) |
+
+**거절 시에도 row는 저장**하되 `consent_marketing=false`로 — 이유: 같은 사용자가 다시 신청해도 *상태를 알 수 있게*. 단 마케팅 발송 대상에서 제외. 사용자가 회수 요청 시 즉시 row 삭제(또는 `deleted_at` 소프트 삭제 후 30일 cron으로 hard delete) — 정책을 운영 가이드에 명시.
+
+UX 흐름: 폼 제출 직전 컨센트 다이얼로그 표시 → 체크박스 기본 ON ("출시되면 이메일로 알려드릴게요") + 약관·개인정보 처리 안내 링크 → [확인]/[취소]. 거절도 OK — 거절해도 신청은 처리됨을 명시.
+
+### 7. PII는 분석 시스템에 흐르지 않는다 — 역할 분리
+
+영구 백엔드(Supabase)와 분석(PostHog)의 데이터 책임이 다르다:
+
+| 데이터 | 영구 백엔드 (Supabase) | 분석 (PostHog) |
+|--------|----------------------|---------------|
+| 이메일 본문 | ✅ source of truth | ❌ 절대 X |
+| `purpose`, `persona`, `consent_marketing` | ✅ 영구 row | ✅ event property + identify trait |
+| 페이지뷰·세션·funnel | ❌ | ✅ |
+| distinctId (hash) | ✅ (연결용) | ✅ |
+
+같은 데이터를 양쪽에 *중복 저장하지 않는다*. 분석 시스템은 hash(email + salt)로 식별하고 *원본 이메일은 보내지 않는다*. 사용자 삭제 요청은 두 시스템 *양쪽*에서 — Supabase row 삭제 + PostHog `delete_person` API. 이 합의는 `landing-analytics-engineer`와 함께 만든다.
+
+### 8. 목적 enum은 고정값
+
+다이어트/위염/기타를 구분하려면 컬럼에 enum-style 표준 값을 사용:
+
+| 값 | 의미 | UI 라벨 (예시) |
+|----|------|--------------|
+| `diet` | 체중 관리·식사 속도 줄이기 | "체중·식습관 관리" |
+| `digestion` | 소화불량·위염·역류 등 위장 문제 | "소화 문제 개선" |
+| `other` | 그 외 (마음챙김 식사·호기심 등) | "기타 / 둘 다" |
+
+UI 라벨은 카피라이터 재량으로 바뀌어도, *DB 값(`diet`/`digestion`/`other`)은 고정* — historical 분석·세그멘테이션 가능성.
 
 ---
 
@@ -102,6 +141,30 @@ CORS 차단은 의도된 보안 기능이다. 노션 공식 API(`api.notion.com`
 - **가시성**: 시트 자체. Apps Script 안에서 `MailApp.sendEmail(...)` 한 줄로 즉시 이메일 알림 추가 가능.
 - **추천 시나리오**: 가장 가벼운 노코드 옵션. 사용자가 구글 계정만 있으면 됨. 토큰 관리 0개.
 
+### Tier B+: BaaS — Supabase / Firebase (구조화된 데이터 + 컨센트·목적 컬럼이 필요할 때)
+
+이메일 한 줄이 아니라 *목적·컨센트·페르소나*까지 받아 분석에 쓰려면 BaaS가 적합하다. 단순 폼 옵션은 컬럼 확장·RLS·SQL 쿼리·삭제 요청 처리가 부족하다.
+
+#### Supabase (권장 BaaS)
+
+- **키 노출**: `anon` 키만 클라이언트에. `service_role`은 절대 X. anon은 RLS와 한 세트 — RLS 없이 anon은 위험.
+- **CORS**: 공식 지원 (`*.supabase.co`).
+- **무료 한도**: DB 500MB, Auth 50k MAU, Edge Functions 500k invocations/월. *7일 비활성 시 일시 정지* (베타에서는 거의 영향 없음 — 가입 트래픽 있으면 active).
+- **운영**: 프로젝트 생성 → 테이블 생성 → RLS 정책 → anon 키 받기 → `@supabase/supabase-js` 통합. 30~60분 셋업.
+- **가시성**: Table Editor + SQL editor + Database Webhook (Supabase 자체) 또는 Edge Function + Slack webhook으로 즉시 알림.
+- **추천 시나리오**: 다음 중 *하나라도* 해당하면 Supabase:
+  - 사용자 목적(`diet`/`digestion`/`other`)·페르소나·컨센트 같은 *구조화된 컬럼*이 필요
+  - 마케팅 옵트인 동의 시점·버전 트래킹이 필요 (GDPR/PIPA)
+  - 사용자 데이터 삭제 요청을 정기적으로 처리해야 함
+  - 향후 본 제품의 백엔드도 Supabase를 쓸 계획 (단일 인프라)
+  - 베타 → 프로덕션으로 데이터를 가져갈 가능성
+
+→ 상세 스키마·RLS·구현 패턴은 `references/supabase-integration.md` 참조 (스키마 DDL, RLS 정책 SQL, supabase-js 통합 코드, 마이그레이션 가이드 포함).
+
+#### Firebase (대안)
+- 거의 동등한 무료 플랜. Firestore document 모델은 SQL이 아니므로 *후속 SQL 분석*이 어렵다. Supabase가 PostgreSQL이라 마이그·분석·CRM 연동에 유리.
+- 사용자가 이미 Firebase를 다른 곳에서 쓰고 있다면 자연스러움. 그 외에는 Supabase 권장.
+
 ### Tier C: 마케팅 자동화 (확인 메일·시퀀스가 필요할 때)
 
 #### Loops / Buttondown / EmailOctopus / Beehiiv
@@ -120,6 +183,11 @@ CORS 차단은 의도된 보안 기능이다. 노션 공식 API(`api.notion.com`
 ## 의사결정 트리
 
 ```
+구조화된 데이터(목적·페르소나·컨센트·utm)가 필요하다
+  → Tier B+ (Supabase 권장)
+  → 컬럼 자유, RLS, SQL 분석, 마이그 가능
+  → references/supabase-integration.md 따름
+
 사용자가 노션을 매일 보고 있다 + 폼 데이터 분류·태깅을 노션에서 한다
   → 패턴 B-1 (Worker + 노션)
   → 단, 사용자가 Cloudflare/Vercel 계정을 만들 수 있어야 한다
@@ -128,13 +196,18 @@ CORS 차단은 의도된 보안 기능이다. 노션 공식 API(`api.notion.com`
   → 패턴 B-2 (Apps Script + 시트)
   → 가장 가벼운 셋업, 토큰 0개
 
-사용자가 가장 빠르게 셋업 + 즉시 이메일 알림이면 충분
+사용자가 가장 빠르게 셋업 + 즉시 이메일 알림이면 충분 (이메일 1줄만)
   → Web3Forms (월 250건)
   또는 Formspree (월 50건 + 대시보드)
 
 월 1k건 이상 + 자동 확인 메일 + 시퀀스
   → Tier C로 이동 (Loops 권장)
 ```
+
+**선택 기준 요약:**
+- *컬럼 1개 (이메일만)* + 운영 가벼움 → Web3Forms / Formspree
+- *컬럼 2~3개* + 사용자가 노션·시트 운영 중 → Tier B (Worker+노션 / Apps Script+시트)
+- *컬럼 4개+* (목적·컨센트·페르소나·utm) + SQL 분석 + 향후 백엔드도 같은 인프라 → **Supabase**
 
 ---
 
@@ -282,16 +355,19 @@ Secrets: `NOTION_TOKEN`, `NOTION_DB_ID`, `ALLOWED_ORIGIN`. `wrangler secret put 
 
 배포 전 반드시 확인 (각 항목 통과 시 ☑).
 
-- [ ] `git grep -E "secret|token|key" landing/src` — 비밀 토큰이 소스에 없는 것 확인
-- [ ] 빌드 후 `grep -ri "<TOKEN_VALUE>" landing/dist` — dist 번들에도 없는 것 확인 (B 패턴은 더 중요)
+- [ ] `git grep -E "secret|service_role|private" landing/src` — 비밀 토큰이 소스에 없는 것 확인
+- [ ] (Supabase 채택 시) `service_role` 키는 *어디에도* 없음. anon 키만 클라이언트에.
+- [ ] (Supabase 채택 시) RLS 활성화 + anon `SELECT` 거부 — 익명 사용자가 data dump 불가
+- [ ] 빌드 후 `grep -ri "<TOKEN_VALUE>" landing/dist` — dist 번들에 비밀 토큰 없음 (B 패턴·Supabase service_role 모두)
 - [ ] `.env.example`은 커밋, `.env`는 `.gitignore`에 — 키가 GitHub에 푸시되지 않는다
 - [ ] honeypot 필드 (`_gotcha`)가 폼에 *시각적으로 숨김* + `tabindex={-1}` + `aria-hidden="true"`
 - [ ] 클라이언트 검증 (이메일 형식, 길이 200자 이하)
-- [ ] 종단간 1건 제출 → 수신처 도착 (스크린샷)
-- [ ] 동일 이메일 5회 연속 제출 — 서버에서 dedupe 또는 rate limit 응답 확인
-- [ ] 폼 에러 시 사용자 메시지 — `rate-limit / network / invalid` 각각 친근한 한국어
-- [ ] 개인정보 처리 안내 카피: "수집 항목: 이메일 / 목적: 베타 진행 소식 / 보관: 베타 종료 시 삭제 / 문의: [메일]"
-- [ ] 옵션 G 톤 — 성공 메시지에 의료 약속·KOL·"전문가 추천" 0건
+- [ ] 종단간 1건 제출 → 수신처 도착 (스크린샷) + 모든 컬럼 채워짐 (`email`, `purpose`, `consent_marketing`, `consent_at`, `consent_version`)
+- [ ] 컨센트 거절 시나리오 — `consent_marketing=false`로 row 저장됨 + 분석 측 identify 미호출
+- [ ] 중복 이메일 — 동일 이메일 재제출 시 사용자에게 success → DB는 갱신 (또는 dedupe 처리)
+- [ ] 폼 에러 시 사용자 메시지 — `rate-limit / network / invalid / duplicate` 각각 친근한 한국어
+- [ ] 개인정보 처리 안내 카피: "수집 항목: 이메일·목적·동의 / 목적: 베타 진행 소식 / 보관: 베타 종료 시 또는 회수 요청 시 삭제 / 문의: [메일]"
+- [ ] 옵션 G 톤 — 성공 메시지·컨센트 카피에 의료 약속·KOL·"전문가 추천" 0건
 
 ---
 
@@ -328,9 +404,13 @@ Secrets: `NOTION_TOKEN`, `NOTION_DB_ID`, `ALLOWED_ORIGIN`. `wrangler secret put 
 이 스킬 사용 종료 시 다음이 *모두* 존재해야 한다:
 
 - [ ] `_workspace/landing/07_data_collection_options.md` — 비교표 + 추천 + *오늘 확인한 무료 한도*
-- [ ] `_workspace/landing/08_data_collection_runbook.md` — 운영 가이드
-- [ ] `landing/src/lib/dataCollection.ts` (또는 동등) — 실제 fetch 코드
-- [ ] `landing/src/components/EmailForm.tsx` — placeholder 제거, 실제 호출 + 에러 처리
-- [ ] `landing/.env.example` — 필요 환경변수 + 주석
+- [ ] `_workspace/landing/08_data_collection_runbook.md` — 운영 가이드 (수신처·알림·삭제 요청 절차 포함)
+- [ ] (Supabase 채택 시) `_workspace/landing/12_supabase_schema.md` — DDL + RLS + Webhook + 마이그레이션 패스
+- [ ] `landing/src/lib/dataCollection.ts` (또는 동등) — 실제 fetch/SDK 호출 코드 + 컨센트·purpose 처리
+- [ ] (Supabase 채택 시) `landing/src/lib/supabaseClient.ts` — `@supabase/supabase-js` init
+- [ ] `landing/src/components/EmailForm.tsx` — 목적 선택 UI + 컨센트 흐름 + 실제 호출 + 에러 처리
+- [ ] `landing/src/components/ConsentDialog.tsx` (신규, 컨센트 도입 시)
+- [ ] `landing/.env.example` — 필요 환경변수 + 주석 (Supabase URL/anon key 또는 W3Forms key 등)
 - [ ] (옵션 B 사용 시) `landing/server/` 또는 `worker/` 서버리스 함수 코드 + 배포 가이드
-- [ ] 종단간 테스트 스크린샷 (수신처 도착 확인)
+- [ ] 종단간 테스트 스크린샷 (수신처 도착 확인 + 모든 컬럼 채워짐)
+- [ ] 컨센트 거절 시나리오 검증 (별도 스크린샷 또는 테스트 결과)

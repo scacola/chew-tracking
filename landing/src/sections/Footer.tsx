@@ -47,6 +47,7 @@ export function Footer() {
               ctaLabel="구독"
               placeholder="이메일"
               helperText=""
+              source="footer"
             />
           </div>
         </div>

@@ -3,6 +3,7 @@ import { Section } from '../components/Section'
 import { Container } from '../components/Container'
 import { FaqItemView } from '../components/FaqItem'
 import { faqs } from '../data/faq'
+import { track } from '../lib/analytics'
 
 export function FAQ() {
   const [openId, setOpenId] = useState<string | null>(null)
@@ -28,7 +29,16 @@ export function FAQ() {
                   a={item.a}
                   highlight={item.highlight}
                   isOpen={openId === item.id}
-                  onToggle={() => setOpenId((cur) => (cur === item.id ? null : item.id))}
+                  onToggle={() => {
+                    setOpenId((cur) => {
+                      const next = cur === item.id ? null : item.id
+                      // 닫기는 발화 X — 09 §2 카탈로그의 faq_open 정의 (열림 액션만)
+                      if (next === item.id) {
+                        track('faq_open', { faq_id: item.id, section_id: 'faq' })
+                      }
+                      return next
+                    })
+                  }}
                 />
               </div>
             ))}

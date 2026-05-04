@@ -1,6 +1,13 @@
 import { useEffect, useState } from 'react'
 import { CtaPrimary } from '../components/CtaPrimary'
 import { cn } from '../lib/cn'
+import { track } from '../lib/analytics'
+
+const NAV_TARGET_TO_CTA_ID: Record<string, string> = {
+  'how-it-works': 'nav_how',
+  pricing: 'nav_pricing',
+  faq: 'nav_faq',
+}
 
 export function StickyNav() {
   const [scrolled, setScrolled] = useState(false)
@@ -45,6 +52,12 @@ export function StickyNav() {
               href={`#${target}`}
               onClick={(e) => {
                 e.preventDefault()
+                track('cta_click', {
+                  cta_id: NAV_TARGET_TO_CTA_ID[target] ?? `nav_${target}`,
+                  source: 'nav',
+                  target: 'scroll',
+                  section_id: target,
+                })
                 document.getElementById(target)?.scrollIntoView({ behavior: 'smooth' })
               }}
               className="text-body-sm text-text-secondary transition-colors hover:text-text-primary"
@@ -58,9 +71,15 @@ export function StickyNav() {
           label="베타 합류"
           size="md"
           href="#final-cta"
-          onClick={() =>
+          onClick={() => {
+            track('cta_click', {
+              cta_id: 'nav_join',
+              source: 'nav',
+              target: 'scroll',
+              section_id: 'final_cta',
+            })
             document.getElementById('final-cta')?.scrollIntoView({ behavior: 'smooth' })
-          }
+          }}
         />
       </div>
     </header>

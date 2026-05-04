@@ -2,6 +2,7 @@ import { Section } from '../components/Section'
 import { Container } from '../components/Container'
 import { EmailForm } from '../components/EmailForm'
 import { eightWeeksFromNowKR } from '../lib/eightWeekDate'
+import { track } from '../lib/analytics'
 
 export function FinalCTA() {
   const dateLabel = eightWeeksFromNowKR()
@@ -45,10 +46,11 @@ export function FinalCTA() {
           style={{ ['--i' as never]: 2 }}
         >
           <EmailForm
-            variant="inline"
+            variant="stacked"
             ctaLabel="베타에 합류하기"
             placeholder="이메일 주소"
             helperText="개인정보는 진행 소식 외에는 사용하지 않아요."
+            source="final_cta"
           />
           <p className="mt-4 text-center text-caption text-text-muted">
             구독 부담 없이 한 번만? —{' '}
@@ -56,6 +58,12 @@ export function FinalCTA() {
               href="#pricing"
               onClick={(e) => {
                 e.preventDefault()
+                track('cta_click', {
+                  cta_id: 'final_cta_single_link',
+                  source: 'final_cta',
+                  target: 'scroll',
+                  section_id: 'final_cta',
+                })
                 document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })
               }}
               className="font-medium text-text-primary underline-offset-4 hover:underline"
