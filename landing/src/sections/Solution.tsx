@@ -4,7 +4,7 @@ import { Container } from '../components/Container'
 
 const cards = [
   {
-    label: 'AIRPODS가 봐줘요',
+    label: '자동으로 기록해요',
     header: '1. 검출',
     icon: Headphones,
     accent: 'clinical' as const,
@@ -14,24 +14,24 @@ const cards = [
         <br />
         앱을 켜거나 버튼을 누를 필요가 없어요.
         <br />
-        <span className="text-text-muted">정확도는 베타에서 매주 다듬고 있어요.</span>
+        <span className="text-text-muted">기록은 눈에 띄지 않게 시작돼요.</span>
       </>
     ),
   },
   {
-    label: '데이터가 말해줘요',
+    label: '오늘의 리듬을 보여줘요',
     header: '2. 깨달음',
     icon: Activity,
     accent: 'cta' as const,
     body: (
       <>
-        매일 점심 후, 식사 속도와 위 건강 점수가 카드 한 장으로 도착해요.
+        매일 점심 후, 식사 속도와 변화가 카드 한 장으로 도착해요.
         <br />
         <span className="text-text-primary font-medium">
-          "오늘 8분에 드셨어요. 어제보다 1분 더 천천히 — 잘하셨어요."
+          "오늘은 8분이었어요. 어제보다 1분 더 천천히 드셨어요."
         </span>
         <br />
-        처음 보는 자기 자신, 처음으로 객관화돼요.
+        내가 생각한 속도와 실제 속도의 차이가 보이기 시작해요.
       </>
     ),
   },
@@ -42,7 +42,7 @@ const cards = [
     accent: 'coaching' as const,
     body: (
       <>
-        임상 신경과학 기반 28일 코스가 매일 2-3분 영상으로 안내해요.
+        28일 코스가 매일 2-3분 영상으로 안내해요.
         <br />
         잔소리 대신 격려, 평가 대신 동행 —
         <br />
@@ -67,7 +67,8 @@ export function Solution() {
           className="text-heading-1 lg:text-display-lg text-center text-text-primary"
           style={{ fontWeight: 700, letterSpacing: '-0.02em' }}
         >
-          보지 못했던 것을, 함께 보고, 함께 바꿔요.
+          보는 순간 이해되고,
+          <br className="hidden md:inline" /> 바로 쓸 수 있어요.
         </h2>
 
         <div data-reveal-stagger className="mt-16 grid gap-6 md:grid-cols-3 md:gap-8">

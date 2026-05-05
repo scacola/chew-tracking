@@ -20,7 +20,6 @@ export type AnalyticsEvent =
   | 'cta_click'
   | 'cta_clicked'
   | 'faq_open'
-  | 'pricing_view'
   | 'email_focus'
   | 'email_input_focused'
   | 'purpose_select'
@@ -40,10 +39,8 @@ export type Source =
   | 'hero'
   | 'final_cta'
   | 'footer'
-  | 'pricing'
-  | 'pricing_card_monthly'
-  | 'pricing_card_yearly'
-  | 'pricing_card_single'
+  | 'how_it_works'
+  | 'faq'
 
 /**
  * BaseProps — track() 시그니처의 props 타입.

@@ -5,7 +5,6 @@ import { track } from '../lib/analytics'
 
 const NAV_TARGET_TO_CTA_ID: Record<string, string> = {
   'how-it-works': 'nav_how',
-  pricing: 'nav_pricing',
   faq: 'nav_faq',
 }
 
@@ -44,7 +43,6 @@ export function StickyNav() {
         <nav className="hidden items-center gap-7 md:flex">
           {[
             ['작동 방식', 'how-it-works'],
-            ['가격', 'pricing'],
             ['FAQ', 'faq'],
           ].map(([label, target]) => (
             <a

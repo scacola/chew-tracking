@@ -28,23 +28,23 @@ export interface PurposeCopy {
 
 /** 디폴트 카피 — 15_consent_copy.md 그대로 */
 export const purposeCopy: PurposeCopy = {
-  legend: '어느 쪽이 가까우세요?',
+  legend: '어떤 이유로 관심이 가세요?',
   helperText: '선택은 진행 소식을 더 잘 보내드리는 데만 써요',
   error: '목적을 하나 선택해주세요',
   options: {
     diet: {
-      label: '체중·식습관 관리',
+      label: '체중·식습관',
       helper: '더 천천히 먹고 싶어요',
       shortLabel: '체중·식습관',
     },
     digestion: {
-      label: '소화·위 건강',
-      helper: '위염·소화불량으로 고민이에요',
-      shortLabel: '소화 문제',
+      label: '식사 리듬',
+      helper: '먹는 속도가 궁금해요',
+      shortLabel: '식사 리듬',
     },
     other: {
       label: '그 외 / 둘 다',
-      helper: '마음챙김 식사도 궁금해요',
+      helper: '먼저 습관을 보고 싶어요',
       shortLabel: '그 외',
     },
   },
