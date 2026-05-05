@@ -2,6 +2,7 @@ import { Section } from '../components/Section'
 import { Container } from '../components/Container'
 import { EmailForm } from '../components/EmailForm'
 import { eightWeeksFromNowKR } from '../lib/eightWeekDate'
+import { CtaSecondary } from '../components/CtaSecondary'
 
 export function FinalCTA() {
   const dateLabel = eightWeeksFromNowKR()
@@ -34,20 +35,19 @@ export function FinalCTA() {
           >
             지금은 베타 단계예요.
             <br />
-            피드백 주시면 바로 반영할게요.
+            사용해보시고 느낀 점을 주시면 다음 업데이트에 반영할게요.
             <br />
-            아래 오픈채팅으로 연락 주세요.
           </p>
-          <p className="mt-4 text-body-sm text-text-on-deep/75">
-            <a
+          <div className="mt-5">
+            <p className="mb-3 text-caption text-text-on-deep/65">
+              피드백은 오픈채팅으로 편하게 보내주세요.
+            </p>
+            <CtaSecondary
               href="https://open.kakao.com/o/sH35Fxti"
-              target="_blank"
-              rel="noreferrer"
-              className="font-medium underline underline-offset-4 hover:text-text-on-deep"
-            >
-              https://open.kakao.com/o/sH35Fxti
-            </a>
-          </p>
+              label="오픈채팅으로 피드백 보내기"
+              className="text-text-on-deep/90 hover:text-text-on-deep"
+            />
+          </div>
         </div>
 
         {/* 폼 */}
