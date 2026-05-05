@@ -33,19 +33,19 @@ export const purposeCopy: PurposeCopy = {
   error: '목적을 하나 선택해주세요',
   options: {
     diet: {
-      label: '체중·식습관',
-      helper: '더 천천히 먹고 싶어요',
-      shortLabel: '체중·식습관',
+      label: '다이어트 목적',
+      helper: '천천히 먹는 습관을 만들고 싶어요',
+      shortLabel: '다이어트',
     },
     digestion: {
-      label: '식사 리듬',
-      helper: '먹는 속도가 궁금해요',
-      shortLabel: '식사 리듬',
+      label: '소화 건강 개선',
+      helper: '속이 편한 식사를 원해요',
+      shortLabel: '소화 건강',
     },
     other: {
-      label: '그 외 / 둘 다',
-      helper: '먼저 습관을 보고 싶어요',
-      shortLabel: '그 외',
+      label: '기타',
+      helper: '식사 습관부터 가볍게 보고 싶어요',
+      shortLabel: '기타',
     },
   },
 }

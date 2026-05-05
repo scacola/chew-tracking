@@ -53,20 +53,20 @@ export function Problem() {
         >
           <div data-reveal className="rounded-xl border-l-4 border-coaching bg-bg-cool p-6 shadow-sm">
             <p className="text-heading-3 leading-snug text-text-primary">
-              빨리 먹는 습관은 스스로 느끼기보다
-              <span className="text-coaching-deep"> 더 자주 반복돼요.</span>
+              한국 성인 검진 코호트에서는
+              <span className="text-coaching-deep"> 5분 미만 식사군의 미란성 위염 위험이 71% 높았어요.</span>
             </p>
             <p className="mt-3 text-caption text-text-muted">
-              — 일상 식사 패턴에서 자주 보이는 흐름
+              — 한국 성인 데이터, 빠른 식사와 위장 부담의 연결
             </p>
           </div>
           <div data-reveal className="rounded-xl border-l-4 border-coaching bg-bg-cool p-6 shadow-sm">
             <p className="text-heading-3 leading-snug text-text-primary">
-              속도를 보면, 바꿔야 할 습관이{' '}
-              <span className="text-coaching-deep">눈에 보여요.</span>
+              저작 횟수 RCT에서는
+              <span className="text-coaching-deep"> 40회 씹기가 식욕과 후속 섭취를 낮췄어요.</span>
             </p>
             <p className="mt-3 text-caption text-text-muted">
-              — 관찰 가능한 입력을 먼저 만드는 것이 핵심
+              — 씹는 행동 자체를 바꾸는 개입의 단기 효과
             </p>
           </div>
         </div>
@@ -77,9 +77,9 @@ export function Problem() {
           className="mt-16 space-y-5"
         >
           {[
-            { quote: '오늘도 금방 먹었는데, 정확히 얼마나 빨랐는지는 모르겠어요.', label: '한지원, 32세' },
-            { quote: '식사만 느려져도 하루가 달라질 것 같은데 방법이 없었어요.', label: '박소연, 34세' },
-            { quote: '천천히 먹으라는 말은 많이 들었는데, 기준이 없었어요.', label: '김상훈, 41세' },
+            { quote: '오늘도 금방 먹었는데, 정확히 얼마나 빨랐는지는 모르겠어요.', label: '익명 응답' },
+            { quote: '식사만 느려져도 하루가 달라질 것 같은데 방법이 없었어요.', label: '익명 응답' },
+            { quote: '천천히 먹으라는 말은 많이 들었는데, 기준이 없었어요.', label: '익명 응답' },
           ].map((item, i) => (
             <blockquote
               key={i}
