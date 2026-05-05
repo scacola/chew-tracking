@@ -32,11 +32,21 @@ export function FinalCTA() {
             className="text-body-lg leading-relaxed text-text-on-deep/85"
             style={{ fontFamily: 'var(--font-serif)', fontStyle: 'italic', fontWeight: 400 }}
           >
-            지금은 기능과 카피를 함께 다듬는 베타 단계예요.
+            지금은 베타 단계예요.
             <br />
-            첫 화면만 봐도 무엇을 하는 서비스인지 바로 이해되도록 만들고 있어요.
+            피드백 주시면 바로 반영할게요.
             <br />
-            이 페이지를 보고 남는 질문을 알려주시면, 다음 수정에 바로 반영할게요.
+            아래 오픈채팅으로 연락 주세요.
+          </p>
+          <p className="mt-4 text-body-sm text-text-on-deep/75">
+            <a
+              href="https://open.kakao.com/o/sH35Fxti"
+              target="_blank"
+              rel="noreferrer"
+              className="font-medium underline underline-offset-4 hover:text-text-on-deep"
+            >
+              https://open.kakao.com/o/sH35Fxti
+            </a>
           </p>
         </div>
 
