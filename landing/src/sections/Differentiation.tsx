@@ -8,32 +8,32 @@ const cards = [
     size: 'lg' as const,
     icon: Calendar,
     accent: 'clinical' as const,
-    title: '28일 한국어 코스 IP',
-    body: '"한국 직장인의 회식·야근·점심 11분"이라는 맥락 위에서 쓴 코스. 일반 jaw-health 메트릭으로는, 한국 위염을 못 다뤄요.',
+    title: '식사 속도에만 집중',
+    body: '체중, 칼로리, 식단 기록이 아니라 식사 속도와 리듬 하나에만 집중해요. 복잡한 입력 없이 바로 이해돼요.',
   },
   {
     id: 'd',
     size: 'lg' as const,
     icon: Sparkles,
     accent: 'coaching' as const,
-    title: '친근한 한국 페르소나 코치',
-    body: '데이터를 따뜻한 언어로 번역하는 한국형 코치 톤. "오늘 8분에 드셨어요" — 잔소리 대신 격려, 평가 대신 동행.',
+    title: '매일 한 장의 코치 카드',
+    body: '데이터를 따뜻한 언어로 번역하는 한국형 코치 톤. "오늘 8분이었어요"처럼 짧고 구체적으로 안내해요.',
   },
   {
     id: 'b',
     size: 'sm' as const,
     icon: Activity,
     accent: 'cta' as const,
-    title: '임상 RCT 데이터 누적',
-    body: '베타 1일차부터 학술 발표 가능 형식으로 익명화 누적. 메트릭이 시간이 갈수록 단단해져요.',
+    title: '자동으로 시작',
+    body: '앱을 열거나 버튼을 누르지 않아도, 평소처럼 식사하면 기록이 시작돼요.',
   },
   {
     id: 'e',
     size: 'sm' as const,
     icon: Heart,
     accent: 'coaching' as const,
-    title: '"위 건강 회복" 결과 라벨',
-    body: '측정 메트릭이 아닌 결과를 약속하는 자산. 한국 30·40대 페인 직결.',
+    title: '결과가 눈에 보임',
+    body: '오늘과 어제의 차이를 바로 볼 수 있어, 무엇을 바꿔야 하는지 한눈에 보여요.',
   },
 ]
 
@@ -52,39 +52,29 @@ export function Differentiation() {
           className="text-heading-1 lg:text-display-lg text-center text-text-primary"
           style={{ fontWeight: 700, letterSpacing: '-0.02em' }}
         >
-          Apple watchOS가 흡수해도,
-          <br className="hidden md:inline" /> 우리만 가진 것 4가지.
+          서비스가 하는 일이
+          <br className="hidden md:inline" /> 한 번에 읽히는 4가지.
         </h2>
 
         {/* 큰 2 + 작은 2 그리드 */}
-        <div data-reveal-stagger className="mt-16 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+        <div data-reveal-stagger className="mt-16 grid gap-5 md:grid-cols-2 lg:gap-6">
           {cards.map((c) => {
             const Icon = c.icon
-            const isLg = c.size === 'lg'
             return (
               <div
                 key={c.id}
                 data-reveal
-                className={`group relative flex flex-col gap-4 rounded-2xl border border-line bg-bg-cool p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg md:p-7 ${
-                  isLg ? 'lg:col-span-2' : 'lg:col-span-1'
-                }`}
+                className="group relative flex h-full min-h-[260px] flex-col gap-4 rounded-2xl border border-line bg-bg-cool p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg md:p-7"
               >
                 <div
                   className={`flex h-11 w-11 items-center justify-center rounded-lg ${accentMap[c.accent]}`}
                 >
                   <Icon size={22} strokeWidth={1.6} />
                 </div>
-                <h3
-                  className={`${isLg ? 'text-heading-3' : 'text-heading-4'} text-text-primary`}
-                  style={{ fontWeight: 700 }}
-                >
+                <h3 className="text-heading-3 text-text-primary" style={{ fontWeight: 700 }}>
                   {c.title}
                 </h3>
-                <p
-                  className={`${isLg ? 'text-body' : 'text-body-sm'} leading-relaxed text-text-secondary`}
-                >
-                  {c.body}
-                </p>
+                <p className="text-body leading-relaxed text-text-secondary">{c.body}</p>
               </div>
             )
           })}
@@ -95,7 +85,7 @@ export function Differentiation() {
           className="mt-16 text-center text-heading-3 text-text-primary lg:text-heading-2"
           style={{ fontWeight: 600 }}
         >
-          도구는 베껴도, 맥락과 톤은 베낄 수 없어요.
+          복잡한 설명보다, 한눈에 보이는 흐름이 먼저예요.
         </p>
       </Container>
     </Section>

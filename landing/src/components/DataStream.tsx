@@ -28,7 +28,7 @@ export function DataStream({
       <div className="my-4 border-t border-line/30" />
       {finale && (
         <div className="flex items-baseline justify-between">
-          <span className="text-text-on-deep/70 text-caption">위 건강 점수 →</span>
+          <span className="text-text-on-deep/70 text-caption">식사 속도 점수 →</span>
           <div className="flex items-baseline gap-3">
             <span className="text-2xl font-semibold text-text-on-deep tabular-nums">
               {finale.score}

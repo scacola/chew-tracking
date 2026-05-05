@@ -18,7 +18,6 @@ export function Footer() {
           <nav className="flex flex-wrap gap-4 md:gap-6">
             {[
               ['How', 'how-it-works'],
-              ['Pricing', 'pricing'],
               ['FAQ', 'faq'],
               ['Privacy', '#'],
               ['Terms', '#'],

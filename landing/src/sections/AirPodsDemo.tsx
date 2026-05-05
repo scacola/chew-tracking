@@ -33,9 +33,9 @@ export function AirPodsDemo() {
               <p className="text-body-lg text-text-on-deep/75">
                 AirPods의 모션 센서가 식사 동작을 잡아내면,
                 <br />
-                그 데이터가 매일 위 건강 점수로 정리돼요.
+                그 데이터가 매일 식사 속도 요약으로 정리돼요.
                 <br />
-                정확도는 베타에서 매주 차분히 다듬고 있어요.
+                중요한 건 정확한 숫자보다도, 오늘과 어제의 차이를 보는 일이에요.
               </p>
             </div>
 

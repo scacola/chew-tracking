@@ -11,28 +11,27 @@ export function Problem() {
           className="text-heading-1 lg:text-display-lg text-center text-text-primary"
           style={{ fontWeight: 700, letterSpacing: '-0.02em' }}
         >
-          당신은 자신의 식사 속도를,
+          대부분은 자신이 얼마나 빨리 먹는지
           <br />
-          정확히는 모르고 있어요.
+          정확히 모른 채 식사해요.
         </h2>
 
         <div data-reveal className="mt-12 lg:mt-16" style={{ ['--i' as never]: 1 }}>
           <div className="space-y-5 text-body-lg leading-relaxed text-text-secondary">
             <p>
-              위염 진단을 받고 의사가{' '}
-              <em className="not-italic font-medium text-text-primary">천천히 드세요</em> 라고 했을 때,
-              그게 정확히 몇 분인지 알려주는 사람은 없었을 거예요.
+              의사가{' '}
+              <em className="not-italic font-medium text-text-primary">천천히 드세요</em> 라고 해도,
+              그게 실제로 몇 분인지 감으로만 넘기기 쉽죠.
             </p>
             <p>
-              한국 직장인의 평균 점심 시간은{' '}
-              <span className="font-mono font-medium text-coaching-deep">11분</span>.
+              바쁜 점심은 금방 끝나고,
               <br />
-              권장 식사 시간(20분 이상)의 절반이에요.
+              식사 속도는 기억보다 훨씬 빠르게 지나가요.
               <br />
-              그런데 정작 본인은 — <em className="not-italic">나는 적당히 먹고 있다</em> 고 느껴요.
+              그런데 정작 본인은 — <em className="not-italic">나는 적당히 먹고 있다</em> 고 느끼기 쉬워요.
             </p>
             <p className="text-text-primary">
-              이게 위염·정체기 다이어트·식후 더부룩함의 가장 흔한 시작점이에요.
+              그래서 먼저 필요한 건 치료가 아니라, 내 식사 리듬을 보게 해주는 도구예요.
             </p>
           </div>
         </div>
@@ -54,20 +53,20 @@ export function Problem() {
         >
           <div data-reveal className="rounded-xl border-l-4 border-coaching bg-bg-cool p-6 shadow-sm">
             <p className="text-heading-3 leading-snug text-text-primary">
-              빠른 식사군은 미란성 위염 위험이{' '}
-              <span className="text-coaching-deep">71% 더 높아요.</span>
+              빨리 먹는 습관은 스스로 느끼기보다
+              <span className="text-coaching-deep"> 더 자주 반복돼요.</span>
             </p>
             <p className="mt-3 text-caption text-text-muted">
-              — Hurst & Fukuda, 위장관 연구 메타분석 (2018)
+              — 일상 식사 패턴에서 자주 보이는 흐름
             </p>
           </div>
           <div data-reveal className="rounded-xl border-l-4 border-coaching bg-bg-cool p-6 shadow-sm">
             <p className="text-heading-3 leading-snug text-text-primary">
-              빠른 식사 습관은 비만 위험을{' '}
-              <span className="text-coaching-deep">2.15배</span> 높여요.
+              속도를 보면, 바꿔야 할 습관이{' '}
+              <span className="text-coaching-deep">눈에 보여요.</span>
             </p>
             <p className="mt-3 text-caption text-text-muted">
-              — Ohkuma et al., 식이 속도와 BMI 코호트 연구 (2015)
+              — 관찰 가능한 입력을 먼저 만드는 것이 핵심
             </p>
           </div>
         </div>
@@ -78,9 +77,9 @@ export function Problem() {
           className="mt-16 space-y-5"
         >
           {[
-            { quote: '오늘 점심도 영상 보면서 끝났어요. 시간이 얼마나 걸렸는지 모르겠어요.', label: '한지원 (위염, 32세)' },
-            { quote: '운동도 했고 칼로리도 줄였는데, 왜 안 빠지는지 모르겠어요.', label: '박소연 (정체기, 34세)' },
-            { quote: '내시경 받을 때마다 듣는 그 말. 어떻게 지키는지 모르겠어요.', label: '김상훈 (검진 후, 41세)' },
+            { quote: '오늘도 금방 먹었는데, 정확히 얼마나 빨랐는지는 모르겠어요.', label: '한지원, 32세' },
+            { quote: '식사만 느려져도 하루가 달라질 것 같은데 방법이 없었어요.', label: '박소연, 34세' },
+            { quote: '천천히 먹으라는 말은 많이 들었는데, 기준이 없었어요.', label: '김상훈, 41세' },
           ].map((item, i) => (
             <blockquote
               key={i}
@@ -104,7 +103,7 @@ export function Problem() {
           className="mt-16 text-center text-heading-3 text-text-primary lg:text-heading-2"
           style={{ ['--i' as never]: 1, fontWeight: 600 }}
         >
-          모르는 게 문제가 아니라, 볼 수 있는 도구가 없었던 것뿐이에요.
+          모르는 게 아니라, 볼 수 있는 도구가 없었던 거예요.
         </p>
       </Container>
     </Section>

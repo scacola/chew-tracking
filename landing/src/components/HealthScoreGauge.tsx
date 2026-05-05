@@ -40,7 +40,7 @@ export function HealthScoreGauge({
       width={size}
       height={size}
       role="img"
-      aria-label={`위 건강 점수 ${score}, 어제 대비 ${change > 0 ? '+' : ''}${change}`}
+      aria-label={`식사 속도 점수 ${score}, 어제 대비 ${change > 0 ? '+' : ''}${change}`}
     >
       {/* 배경 원 */}
       <circle cx="80" cy="80" r={r} stroke="#E8EAEE" strokeWidth="6" fill="none" />
@@ -79,7 +79,7 @@ export function HealthScoreGauge({
         fontFamily="Pretendard Variable, system-ui"
         letterSpacing="0.04em"
       >
-        위 건강 점수
+        식사 속도 점수
       </text>
       <text
         x="80"

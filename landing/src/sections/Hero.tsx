@@ -22,7 +22,7 @@ export function Hero() {
       {/* Persona-specific subhead chip — discreet */}
       <div className="absolute right-4 top-4 z-10 hidden md:block">
         <span className="rounded-full border border-line bg-bg-cool/80 px-3 py-1 text-caption text-text-muted backdrop-blur">
-          {persona === 'stomach' ? '위염' : persona === 'diet' ? '정체기' : '검진'} 시각
+          {persona === 'stomach' ? '식사 리듬' : persona === 'diet' ? '정체기' : '점검'} 시각
         </span>
       </div>
 
@@ -35,10 +35,9 @@ export function Hero() {
               className="text-display-lg lg:text-display-xl text-text-primary"
               style={{ fontWeight: 800, letterSpacing: '-0.025em' }}
             >
-              당신의 점심은 평균{' '}
-              <span className="text-clinical-deep">11분</span>.
+              AirPods로 식사 속도를 자동 기록하고,
               <br />
-              <span className="text-clinical-deep">8주</span>만, 위 건강을 차분히 되찾아요.
+              매일 짧은 코치로 천천히 먹는 습관을 만들어요.
             </h1>
 
             <p
@@ -46,18 +45,17 @@ export function Hero() {
               className="text-body-lg text-text-secondary"
               style={{ ['--i' as never]: 1 }}
             >
-              {/* 데스크탑: 2줄 / 모바일: 3줄 */}
               <span className="hidden lg:inline">
-                이미 끼고 있는 AirPods가 식사 속도를 자동으로 보여주고,
+                이미 끼고 있는 AirPods가 식사 중 리듬을 자동으로 기록하고,
                 <br />
-                임상 28일 코스가 매일 2-3분, 함께 걸어요.
+                매일 2-3분의 코치 카드가 천천히 먹는 흐름을 잡아줘요.
               </span>
               <span className="lg:hidden">
                 이미 끼고 있는 AirPods가
                 <br />
-                식사 속도를 보여주고,
+                식사 리듬을 기록하고,
                 <br />
-                임상 28일 코스가 매일 2-3분 함께 걸어요.
+                매일 2-3분 코치 카드가 함께해요.
               </span>
             </p>
 
@@ -110,9 +108,9 @@ export function Hero() {
               className="flex flex-wrap items-center gap-x-2 gap-y-1 text-caption text-text-muted opacity-70"
               style={{ ['--i' as never]: 4 }}
             >
-              <span>임상 메타분석 근거 기반</span>
+              <span>AirPods 기반 자동 측정</span>
               <span aria-hidden>·</span>
-              <span>RCT 8주차 진행 중</span>
+              <span>매일 짧은 코치 카드</span>
               <span aria-hidden>·</span>
               <span>베타 모집 중</span>
             </p>
