@@ -65,7 +65,7 @@ export function HealthScoreGauge({
         textAnchor="middle"
         fontSize="36"
         fontWeight="700"
-        fill="#0A0E1A"
+        fill="#F5F7FA"
         fontFamily="Pretendard Variable, system-ui"
       >
         {animated ? score : 0}
@@ -75,7 +75,7 @@ export function HealthScoreGauge({
         y="100"
         textAnchor="middle"
         fontSize="11"
-        fill="#5A5F6E"
+        fill="#B2EFE3"
         fontFamily="Pretendard Variable, system-ui"
         letterSpacing="0.04em"
       >

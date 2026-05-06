@@ -26,7 +26,7 @@ export function AirPodsDemo() {
                 className="text-heading-1 lg:text-display-lg text-text-on-deep"
                 style={{ fontWeight: 700, letterSpacing: '-0.02em' }}
               >
-                이미 끼고 있는 그것이,
+                이미 끼고 있는 에어팟이,
                 <br />
                 식사를 보고 있어요.
               </h2>

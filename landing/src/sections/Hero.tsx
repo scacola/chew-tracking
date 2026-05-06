@@ -46,12 +46,12 @@ export function Hero() {
               style={{ ['--i' as never]: 1 }}
             >
               <span className="hidden lg:inline">
-                이미 끼고 있는 AirPods가 식사 중 리듬을 자동으로 기록하고,
+                이미 끼고 있는 에어팟이 식사 중 리듬을 자동으로 기록하고,
                 <br />
                 매일 2-3분의 코치 카드가 천천히 먹는 흐름을 잡아줘요.
               </span>
               <span className="lg:hidden">
-                이미 끼고 있는 AirPods가
+                이미 끼고 있는 에어팟이
                 <br />
                 식사 리듬을 기록하고,
                 <br />
