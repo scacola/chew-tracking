@@ -27,13 +27,13 @@ function App() {
     document.documentElement.lang = copy.locale
     document.title =
       copy.locale === 'ja'
-        ? 'Chew & Calm Coach | AirPodsで食事ペースを見える化'
+        ? 'Chew & Calm Coach | AirPodsで食事ペースを視覚化'
         : 'Chew & Calm Coach | AirPods로 식사 속도 기록'
     const description = document.querySelector('meta[name="description"]')
     description?.setAttribute(
       'content',
       copy.locale === 'ja'
-        ? 'AirPodsで食べる速さを見える化し、食事のペースを無理なく整えるセルフケアアプリ。'
+        ? 'AirPodsで食べる速さを視覚化し、食事のペースを無理なく整えるセルフケアアプリ。'
         : 'AirPods로 식사 속도를 자동 기록하고, 매일 짧은 코치로 천천히 먹는 습관을 만드는 서비스.',
     )
   }, [copy.locale])
