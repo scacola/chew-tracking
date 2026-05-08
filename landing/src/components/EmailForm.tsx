@@ -16,6 +16,7 @@ import {
   successCopy as defaultSuccessCopy,
   errorCopy as defaultErrorCopy,
   type ConsentDialogCopy,
+  type ErrorCopy,
   type SuccessCopy,
 } from '../data/copy/consent'
 import { env } from '../lib/env'
@@ -49,6 +50,8 @@ export interface EmailFormProps {
   purposeCopy?: typeof defaultPurposeCopy
   consentCopy?: ConsentDialogCopy
   successCopy?: SuccessCopy
+  errorCopy?: ErrorCopy
+  submittingLabel?: string
 }
 
 export function EmailForm({
@@ -60,6 +63,8 @@ export function EmailForm({
   purposeCopy = defaultPurposeCopy,
   consentCopy = defaultConsentCopy,
   successCopy = defaultSuccessCopy,
+  errorCopy = defaultErrorCopy,
+  submittingLabel = '처리 중...',
 }: EmailFormProps) {
   const [email, setEmail] = useState('')
   const [gotcha, setGotcha] = useState('')
@@ -295,7 +300,7 @@ export function EmailForm({
               isCaption ? 'h-10 px-5 text-body-sm' : 'h-14 px-7 text-body',
             )}
           >
-            <span>{status === 'submitting' ? '처리 중...' : ctaLabel}</span>
+            <span>{status === 'submitting' ? submittingLabel : ctaLabel}</span>
             {status !== 'submitting' && <ArrowRight size={18} strokeWidth={1.75} />}
           </button>
         </div>
@@ -313,7 +318,7 @@ export function EmailForm({
         )}
         {status === 'error' && (
           <p className="text-caption text-error" role="alert">
-            {defaultErrorCopy[errorReason]}
+            {errorCopy[errorReason]}
           </p>
         )}
       </form>

@@ -3,9 +3,18 @@ import { Container } from '../components/Container'
 import { EmailForm } from '../components/EmailForm'
 import { eightWeeksFromNowKR } from '../lib/eightWeekDate'
 import { CtaPrimary } from '../components/CtaPrimary'
+import { useCopy } from '../hooks/useCopy'
+import { purposeCopyJa } from '../data/copy/purpose'
+import {
+  consentDialogCopyJa,
+  errorCopyJa,
+  successCopyJa,
+} from '../data/copy/consent'
 
 export function FinalCTA() {
+  const copy = useCopy()
   const dateLabel = eightWeeksFromNowKR()
+  const isJa = copy.locale === 'ja'
 
   return (
     <Section tone="deep" paddingY="xl" id="final-cta">
@@ -15,12 +24,16 @@ export function FinalCTA() {
           className="text-heading-1 lg:text-display-lg text-center text-text-on-deep"
           style={{ fontWeight: 700, letterSpacing: '-0.02em' }}
         >
-          8주 후에는 식사 속도와
-          <br />
-          식사 리듬이 어떻게 달라졌는지 보이기 시작해요.
-          <br />
-          오늘 시작하면, 그 흐름이{' '}
-          <span className="text-clinical-soft">{dateLabel}</span>에 도착해요.
+          {copy.finalCta.title.map((line) => (
+            <span key={line} className="block">
+              {line}
+            </span>
+          ))}
+          {!isJa && (
+            <span className="block">
+              {copy.finalCta.datePrefix} <span className="text-clinical-soft">{dateLabel}</span>에 도착해요.
+            </span>
+          )}
         </h2>
 
         {/* 손편지 박스 (R3) */}
@@ -33,19 +46,20 @@ export function FinalCTA() {
             className="text-body-lg leading-relaxed text-text-on-deep/85"
             style={{ fontFamily: 'var(--font-serif)', fontStyle: 'italic', fontWeight: 400 }}
           >
-            지금은 베타 단계예요.
-            <br />
-            문의사항이나 궁금하신 점은 아래 오픈 채팅으로 편하게 말씀주세요.
-            <br />
+            {copy.finalCta.letter.map((line) => (
+              <span key={line} className="block">
+                {line}
+              </span>
+            ))}
           </p>
-          <div className="mt-5">
+          {!isJa && <div className="mt-5">
             <CtaPrimary
               href="https://open.kakao.com/o/sH35Fxti"
               label="오픈채팅으로 피드백 보내기"
               size="md"
               className="w-fit bg-text-on-deep/10 text-text-on-deep shadow-none ring-1 ring-inset ring-text-on-deep/18 hover:bg-text-on-deep/16 hover:shadow-none"
             />
-          </div>
+          </div>}
         </div>
 
         {/* 폼 */}
@@ -56,10 +70,15 @@ export function FinalCTA() {
         >
           <EmailForm
             variant="stacked"
-            ctaLabel="업데이트 받기"
-            placeholder="이메일 주소"
-            helperText="개인정보는 진행 소식 외에는 사용하지 않아요."
+            ctaLabel={copy.finalCta.formCta}
+            placeholder={copy.finalCta.formPlaceholder}
+            helperText={copy.finalCta.formHelper}
             source="final_cta"
+            purposeCopy={isJa ? purposeCopyJa : undefined}
+            consentCopy={isJa ? consentDialogCopyJa : undefined}
+            successCopy={isJa ? successCopyJa : undefined}
+            errorCopy={isJa ? errorCopyJa : undefined}
+            submittingLabel={copy.form.submitting}
           />
         </div>
       </Container>

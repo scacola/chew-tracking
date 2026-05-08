@@ -10,7 +10,8 @@
 // 자세한 카탈로그: _workspace/landing/09_analytics_plan.md §2
 
 import { posthog } from './posthogClient'
-import { isPostHogEnabled } from './env'
+import Clarity from '@microsoft/clarity'
+import { env, isClarityEnabled, isPostHogEnabled } from './env'
 
 /** 이벤트 카탈로그 — 09_analytics_plan.md §2 표 그대로 */
 export type AnalyticsEvent =
@@ -73,15 +74,30 @@ export interface BaseProps {
   persona?: string
   is_duplicate?: boolean
   email_hash?: string
+  locale?: 'ko' | 'ja'
   /** 그 외 자유 — 새 차원은 09_analytics_plan.md §3에 등록 후 사용 */
   [k: string]: unknown
+}
+
+let clarityStarted = false
+
+function ensureClarity(): boolean {
+  if (clarityStarted) return true
+  if (!isClarityEnabled() || !env.VITE_CLARITY_PROJECT_ID) return false
+  Clarity.init(env.VITE_CLARITY_PROJECT_ID)
+  clarityStarted = true
+  return true
 }
 
 /** 모든 분석 발화 단일 진입점 */
 export function track(event: AnalyticsEvent, props: BaseProps = {}): void {
   if (typeof window === 'undefined') return
-  if (!isPostHogEnabled()) return
-  posthog.capture(event, props)
+  if (isPostHogEnabled()) {
+    posthog.capture(event, props)
+  }
+  if (ensureClarity()) {
+    Clarity.event(event)
+  }
 }
 
 /** identify trait 화이트리스트 — PII 금지 */

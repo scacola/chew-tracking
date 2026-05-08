@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { CtaPrimary } from '../components/CtaPrimary'
 import { cn } from '../lib/cn'
 import { track } from '../lib/analytics'
+import { useCopy } from '../hooks/useCopy'
 
 const NAV_TARGET_TO_CTA_ID: Record<string, string> = {
   'how-it-works': 'nav_how',
@@ -10,6 +11,7 @@ const NAV_TARGET_TO_CTA_ID: Record<string, string> = {
 
 export function StickyNav() {
   const [scrolled, setScrolled] = useState(false)
+  const copy = useCopy()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 100)
@@ -42,8 +44,8 @@ export function StickyNav() {
 
         <nav className="hidden items-center gap-7 md:flex">
           {[
-            ['작동 방식', 'how-it-works'],
-            ['FAQ', 'faq'],
+            [copy.nav.how, 'how-it-works'],
+            [copy.nav.faq, 'faq'],
           ].map(([label, target]) => (
             <a
               key={target}
@@ -54,6 +56,7 @@ export function StickyNav() {
                   cta_id: NAV_TARGET_TO_CTA_ID[target] ?? `nav_${target}`,
                   cta_text: label,
                   location: 'sticky_nav',
+                  locale: copy.locale,
                 })
                 document.getElementById(target)?.scrollIntoView({ behavior: 'smooth' })
               }}
@@ -65,14 +68,15 @@ export function StickyNav() {
         </nav>
 
         <CtaPrimary
-          label="베타 합류"
+          label={copy.nav.cta}
           size="md"
           href="#final-cta"
           onClick={() => {
             track('cta_clicked', {
               cta_id: 'nav_join',
-              cta_text: '베타 합류',
+              cta_text: copy.nav.cta,
               location: 'sticky_nav',
+              locale: copy.locale,
             })
             document.getElementById('final-cta')?.scrollIntoView({ behavior: 'smooth' })
           }}

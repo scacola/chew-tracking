@@ -50,4 +50,27 @@ export const purposeCopy: PurposeCopy = {
   },
 }
 
+export const purposeCopyJa: PurposeCopy = {
+  legend: '関心のあるテーマは？',
+  helperText: 'ご案内内容を整えるためだけに使います',
+  error: '目的を1つ選択してください',
+  options: {
+    diet: {
+      label: '早食いを整えたい',
+      helper: '食べる速さに気づきたい',
+      shortLabel: '早食い',
+    },
+    digestion: {
+      label: '食事ペース',
+      helper: '無理なく食べ方を整えたい',
+      shortLabel: 'ペース',
+    },
+    other: {
+      label: 'その他',
+      helper: 'まずは軽く試してみたい',
+      shortLabel: 'その他',
+    },
+  },
+}
+
 export const PURPOSE_VALUES: Purpose[] = ['diet', 'digestion', 'other']

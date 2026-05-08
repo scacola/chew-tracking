@@ -19,6 +19,7 @@ const EnvSchema = z.object({
     .regex(/^phc_/, 'PostHog public key must start with phc_')
     .optional(),
   VITE_POSTHOG_HOST: z.string().url().optional(),
+  VITE_CLARITY_PROJECT_ID: z.string().min(1).optional(),
   VITE_HASH_SALT: z.string().min(8, 'Salt must be at least 8 chars').optional(),
   VITE_CONSENT_VERSION: z
     .string()
@@ -34,6 +35,7 @@ function readRawEnv(): Record<string, unknown> {
     VITE_SUPABASE_ANON_KEY: import.meta.env.VITE_SUPABASE_ANON_KEY,
     VITE_POSTHOG_KEY: import.meta.env.VITE_POSTHOG_KEY,
     VITE_POSTHOG_HOST: import.meta.env.VITE_POSTHOG_HOST,
+    VITE_CLARITY_PROJECT_ID: import.meta.env.VITE_CLARITY_PROJECT_ID,
     VITE_HASH_SALT: import.meta.env.VITE_HASH_SALT,
     VITE_CONSENT_VERSION: import.meta.env.VITE_CONSENT_VERSION,
   }
@@ -71,6 +73,11 @@ export function isPostHogEnabled(): boolean {
   return !!(env.VITE_POSTHOG_KEY && env.VITE_POSTHOG_HOST)
 }
 
+/** 런타임 helper — Microsoft Clarity 사용 가능 여부 */
+export function isClarityEnabled(): boolean {
+  return !!env.VITE_CLARITY_PROJECT_ID
+}
+
 /** dev 환경에서 키 누락 안내 1회 */
 let warnedOnce = false
 export function warnIfDisabled(): void {
@@ -85,6 +92,11 @@ export function warnIfDisabled(): void {
   if (!isPostHogEnabled()) {
     console.warn(
       '[env] PostHog 키 누락 — 분석이 비활성화됩니다. landing/.env에 VITE_POSTHOG_KEY, VITE_POSTHOG_HOST 채우기.',
+    )
+  }
+  if (!isClarityEnabled()) {
+    console.warn(
+      '[env] Clarity 키 누락 — 세션 리플레이가 비활성화됩니다. landing/.env에 VITE_CLARITY_PROJECT_ID 채우기.',
     )
   }
 }

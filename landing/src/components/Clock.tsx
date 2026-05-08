@@ -7,11 +7,13 @@ export function Clock({
   target,
   label,
   variant = 'fast',
+  unit = '분',
 }: {
   minutes: number
   target: number
   label: string
   variant?: 'fast' | 'target'
+  unit?: string
 }) {
   const r = 56
   const circumference = 2 * Math.PI * r
@@ -71,7 +73,7 @@ export function Clock({
           fontFamily="Pretendard Variable, system-ui"
           letterSpacing="0.06em"
         >
-          분
+          {unit}
         </text>
       </svg>
       <p className={cn('text-caption', variant === 'fast' ? 'text-coaching-deep' : 'text-clinical-deep')}>

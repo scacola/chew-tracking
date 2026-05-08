@@ -3,9 +3,11 @@ type Row = { time: string; label: string; emphasis?: boolean }
 export function DataStream({
   rows,
   finale,
+  finaleLabel = '식사 속도 점수 →',
 }: {
   rows: Row[]
   finale?: { score: number; change: number }
+  finaleLabel?: string
 }) {
   return (
     <div className="font-mono text-data-mono rounded-xl border border-line/60 bg-bg-deep p-5 text-text-on-deep shadow-md md:p-6">
@@ -28,7 +30,7 @@ export function DataStream({
       <div className="my-4 border-t border-line/30" />
       {finale && (
         <div className="flex items-baseline justify-between">
-          <span className="text-text-on-deep/70 text-caption">식사 속도 점수 →</span>
+          <span className="text-text-on-deep/70 text-caption">{finaleLabel}</span>
           <div className="flex items-baseline gap-3">
             <span className="text-2xl font-semibold text-text-on-deep tabular-nums">
               {finale.score}

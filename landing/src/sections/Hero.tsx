@@ -5,6 +5,7 @@ import { AirpodsSvg } from '../components/icons/AirpodsSvg'
 import { usePersonaRoute } from '../hooks/usePersonaRoute'
 import { personas } from '../data/personas'
 import { track } from '../lib/analytics'
+import { useCopy } from '../hooks/useCopy'
 
 function smoothScrollTo(id: string) {
   document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
@@ -13,6 +14,7 @@ function smoothScrollTo(id: string) {
 export function Hero() {
   const persona = usePersonaRoute()
   const subhead = personas[persona].subhead
+  const copy = useCopy()
 
   return (
     <section
@@ -22,7 +24,7 @@ export function Hero() {
       {/* Persona-specific subhead chip — discreet */}
       <div className="absolute right-4 top-4 z-10 hidden md:block">
         <span className="rounded-full border border-line bg-bg-cool/80 px-3 py-1 text-caption text-text-muted backdrop-blur">
-          {persona === 'stomach' ? '식사 리듬' : persona === 'diet' ? '정체기' : '점검'} 시각
+          {copy.hero.personaChip[persona]}
         </span>
       </div>
 
@@ -35,9 +37,11 @@ export function Hero() {
               className="text-display-lg lg:text-display-xl text-text-primary"
               style={{ fontWeight: 800, letterSpacing: '-0.025em' }}
             >
-              AirPods로 식사 속도를 자동 기록하고,
-              <br />
-              매일 짧은 코치로 천천히 먹는 습관을 만들어요.
+              {copy.hero.title.map((line) => (
+                <span key={line} className="block">
+                  {line}
+                </span>
+              ))}
             </h1>
 
             <p
@@ -46,16 +50,18 @@ export function Hero() {
               style={{ ['--i' as never]: 1 }}
             >
               <span className="hidden lg:inline">
-                이미 끼고 있는 에어팟이 식사 중 리듬을 자동으로 기록하고,
-                <br />
-                매일 2-3분의 코치 카드가 천천히 먹는 흐름을 잡아줘요.
+                {copy.hero.bodyDesktop.map((line) => (
+                  <span key={line} className="block">
+                    {line}
+                  </span>
+                ))}
               </span>
               <span className="lg:hidden">
-                이미 끼고 있는 에어팟이
-                <br />
-                식사 리듬을 기록하고,
-                <br />
-                매일 2-3분 코치 카드가 함께해요.
+                {copy.hero.bodyMobile.map((line) => (
+                  <span key={line} className="block">
+                    {line}
+                  </span>
+                ))}
               </span>
             </p>
 
@@ -65,7 +71,7 @@ export function Hero() {
               className="rounded-lg border border-line/50 bg-bg-cool/60 p-4 text-body-sm text-text-secondary backdrop-blur lg:hidden"
               style={{ ['--i' as never]: 2 }}
             >
-              {subhead.map((line, i) => (
+              {(copy.locale === 'ko' ? subhead : copy.problem.paragraphs.slice(0, 1)).map((line, i) => (
                 <span key={i} className="block">
                   {line}
                 </span>
@@ -78,25 +84,27 @@ export function Hero() {
               style={{ ['--i' as never]: 3 }}
             >
               <CtaPrimary
-                label="베타에 합류하기"
+                label={copy.hero.primaryCta}
                 href="#final-cta"
                 onClick={() => {
                   track('cta_clicked', {
                     cta_id: 'hero_primary',
-                    cta_text: '베타에 합류하기',
+                    cta_text: copy.hero.primaryCta,
                     location: 'hero',
+                    locale: copy.locale,
                   })
                   smoothScrollTo('final-cta')
                 }}
               />
               <CtaSecondary
                 href="#airpods-demo"
-                label="어떻게 작동하는지 보기"
+                label={copy.hero.secondaryCta}
                 onClick={() => {
                   track('cta_clicked', {
                     cta_id: 'hero_secondary',
-                    cta_text: '어떻게 작동하는지 보기',
+                    cta_text: copy.hero.secondaryCta,
                     location: 'hero',
+                    locale: copy.locale,
                   })
                   smoothScrollTo('airpods-demo')
                 }}
@@ -108,11 +116,12 @@ export function Hero() {
               className="flex flex-wrap items-center gap-x-2 gap-y-1 text-caption text-text-muted opacity-70"
               style={{ ['--i' as never]: 4 }}
             >
-              <span>AirPods 기반 자동 측정</span>
-              <span aria-hidden>·</span>
-              <span>매일 짧은 코치 카드</span>
-              <span aria-hidden>·</span>
-              <span>베타 모집 중</span>
+              {copy.hero.trustSignals.map((signal, index) => (
+                <span key={signal} className="contents">
+                  {index > 0 && <span aria-hidden>·</span>}
+                  <span>{signal}</span>
+                </span>
+              ))}
             </p>
           </div>
 

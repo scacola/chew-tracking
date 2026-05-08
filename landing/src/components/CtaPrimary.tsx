@@ -1,6 +1,7 @@
 import { ArrowRight } from 'lucide-react'
 import type { ReactNode } from 'react'
 import { cn } from '../lib/cn'
+import { track } from '../lib/analytics'
 
 export function CtaPrimary({
   href,
@@ -9,6 +10,7 @@ export function CtaPrimary({
   icon,
   className,
   size = 'lg',
+  trackingName,
 }: {
   href?: string
   onClick?: () => void
@@ -16,6 +18,7 @@ export function CtaPrimary({
   icon?: ReactNode
   className?: string
   size?: 'md' | 'lg'
+  trackingName?: string
 }) {
   const cls = cn(
     'inline-flex items-center justify-center gap-2 rounded-full bg-cta text-white font-medium',
@@ -38,6 +41,7 @@ export function CtaPrimary({
       <a
         href={href}
         onClick={(e) => {
+          if (trackingName) track('cta_click', { cta_id: trackingName, label })
           if (href.startsWith('#') && onClick) {
             e.preventDefault()
             onClick()
@@ -50,7 +54,14 @@ export function CtaPrimary({
     )
   }
   return (
-    <button type="button" onClick={onClick} className={cls}>
+    <button
+      type="button"
+      onClick={() => {
+        if (trackingName) track('cta_click', { cta_id: trackingName, label })
+        onClick?.()
+      }}
+      className={cls}
+    >
       {content}
     </button>
   )

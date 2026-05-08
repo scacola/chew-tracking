@@ -67,10 +67,35 @@ export const consentDialogCopy: ConsentDialogCopy = {
   },
 }
 
+export const consentDialogCopyJa: ConsentDialogCopy = {
+  head: 'ベータ版のご案内',
+  body: 'ベータ版の準備ができたらメールでお知らせします。発売情報以外の広告は送らず、いつでも配信停止できます。大げさな約束ではなく、一緒に検証してくださる方を募集しています。',
+  checkbox: {
+    label: 'ベータ版・発売情報を受け取る（任意）',
+    uncheckedHint: '案内メールは送りません。登録はそのまま処理されます。',
+  },
+  links: {
+    terms: '利用規約',
+    privacy: 'プライバシーポリシー',
+    versionLabel: '適用日',
+    versionSeparator: ' · ',
+  },
+  buttons: {
+    primary: '確認して登録',
+    secondary: 'キャンセル',
+  },
+}
+
 export const successCopy: SuccessCopy = {
   optedIn: '합류해주셔서 감사해요. 베타가 준비되면 가장 먼저 알려드릴게요.',
   optedOut:
     '신청해주셔서 감사해요. 따로 메일은 보내지 않을게요. 출시되면 사이트에서 만나요.',
+}
+
+export const successCopyJa: SuccessCopy = {
+  optedIn: 'ご登録ありがとうございます。ベータ版の準備ができたらお知らせします。',
+  optedOut:
+    'ご登録ありがとうございます。メールでのご案内は送らず、サイト上でお知らせします。',
 }
 
 export const errorCopy: ErrorCopy = {
@@ -81,6 +106,16 @@ export const errorCopy: ErrorCopy = {
   consent_required: '잠깐 문제가 있었어요. 다시 한 번 시도해주세요.',
   consent_skew: '기기 시간에 차이가 있는 것 같아요. 시계를 맞춘 뒤 다시 시도해주세요.',
   unknown: '전송 중 예기치 않은 문제가 있었어요. 잠시 후 다시 시도해주세요.',
+}
+
+export const errorCopyJa: ErrorCopy = {
+  invalid: 'メールアドレスの形式を確認してください。',
+  network: '送信に失敗しました。しばらくしてからもう一度お試しください。',
+  'rate-limit': 'リクエストが多いようです。1分後にもう一度お試しください。',
+  config: '送信設定に問題があります。しばらくしてからもう一度お試しください。',
+  consent_required: 'もう一度お試しください。',
+  consent_skew: '端末の時刻を確認してから、もう一度お試しください。',
+  unknown: '送信中に問題が発生しました。しばらくしてからもう一度お試しください。',
 }
 
 export const consentMeta: ConsentMeta = {
