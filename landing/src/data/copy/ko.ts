@@ -236,4 +236,8 @@ export const ko: Copy = {
     success: '합류해주셔서 감사해요. 진행 소식을 보내드릴게요.',
     invalidEmail: '이메일 주소 형식을 확인해주세요.',
   },
+  common: {
+    scroll: '스크롤',
+    minute: '분',
+  },
 }

@@ -44,6 +44,7 @@ export function Problem() {
               target={clock.target}
               variant={clock.variant}
               label={clock.label}
+              unit={copy.common.minute}
             />
           ))}
         </div>

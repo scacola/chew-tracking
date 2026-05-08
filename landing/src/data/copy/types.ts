@@ -131,4 +131,8 @@ export type Copy = {
     success: string
     invalidEmail: string
   }
+  common: {
+    scroll: string
+    minute: string
+  }
 }

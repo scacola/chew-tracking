@@ -203,4 +203,8 @@ export const ja: Copy = {
     success: 'ご登録ありがとうございます。ベータ版の案内をお送りします。',
     invalidEmail: 'メールアドレスの形式を確認してください。',
   },
+  common: {
+    scroll: 'スクロール',
+    minute: '分',
+  },
 }
