@@ -6,14 +6,14 @@ import { Solution } from './sections/Solution'
 import { AirPodsDemo } from './sections/AirPodsDemo'
 import { HowItWorks } from './sections/HowItWorks'
 import { Differentiation } from './sections/Differentiation'
-import { Authority } from './sections/Authority'
-import { Pricing } from './sections/Pricing'
 import { FAQ } from './sections/FAQ'
 import { FinalCTA } from './sections/FinalCTA'
 import { Footer } from './sections/Footer'
 import { initRevealOnScroll } from './interactions/revealOnScroll'
+import { track } from './lib/analytics'
 import { useCopy } from './hooks/useCopy'
-import { initClarity, trackLandingView } from './lib/analytics'
+
+let landingPageViewed = false
 
 function App() {
   const copy = useCopy()
@@ -24,40 +24,31 @@ function App() {
   }, [])
 
   useEffect(() => {
-    const meta = {
-      ko: {
-        title: 'Chew & Calm Coach — 8주, 위 건강을 차분히 되찾아요',
-        description:
-          '위염 진단을 받았거나, 체중이 정체되었거나, 점심마다 더부룩한 30·40대라면 — 이미 끼고 있는 AirPods로 식사 속도를 자동 측정하고, 임상 28일 코스로 매일 2-3분 위 건강을 되찾아요.',
-        ogDescription:
-          '이미 끼고 있는 AirPods가 식사 속도를 자동으로 보여주고, 임상 28일 코스가 매일 2-3분 함께 걸어요.',
-        ogLocale: 'ko_KR',
-        skip: '본문으로 건너뛰기',
-      },
-      ja: {
-        title: 'Chew & Calm Coach｜AirPodsで食べる速さを見える化',
-        description:
-          'AirPodsのモーションデータで食事ペースを記録。早食いに気づき、ゆっくり食べる習慣を育てるセルフケアアプリ。ベータ版参加受付中。',
-        ogDescription:
-          'AirPodsで食べる速さを見える化。早食いに気づき、食事のペースを無理なく整えるセルフケアアプリ。',
-        ogLocale: 'ja_JP',
-        skip: '本文へスキップ',
-      },
-    }[copy.locale]
-
     document.documentElement.lang = copy.locale
-    document.title = meta.title
-    document.querySelector('meta[name="description"]')?.setAttribute('content', meta.description)
-    document.querySelector('meta[property="og:title"]')?.setAttribute('content', meta.title)
-    document
-      .querySelector('meta[property="og:description"]')
-      ?.setAttribute('content', meta.ogDescription)
-    document.querySelector('meta[property="og:locale"]')?.setAttribute('content', meta.ogLocale)
-    const skipLink = document.querySelector<HTMLAnchorElement>('.skip-link')
-    if (skipLink) skipLink.textContent = meta.skip
+    document.title =
+      copy.locale === 'ja'
+        ? 'Chew & Calm Coach | AirPodsで食事ペースを見える化'
+        : 'Chew & Calm Coach | AirPods로 식사 속도 기록'
+    const description = document.querySelector('meta[name="description"]')
+    description?.setAttribute(
+      'content',
+      copy.locale === 'ja'
+        ? 'AirPodsで食べる速さを見える化し、食事のペースを無理なく整えるセルフケアアプリ。'
+        : 'AirPods로 식사 속도를 자동 기록하고, 매일 짧은 코치로 천천히 먹는 습관을 만드는 서비스.',
+    )
+  }, [copy.locale])
 
-    initClarity()
-    trackLandingView(copy.locale, window.location.pathname)
+  // landing_page_viewed — 1회 발화. path/referrer만 전송.
+  useEffect(() => {
+    if (landingPageViewed) return
+    if (typeof window === 'undefined') return
+    landingPageViewed = true
+    track('landing_page_viewed', {
+      source: 'landing_page',
+      path: window.location.pathname,
+      referrer: document.referrer || undefined,
+      locale: copy.locale,
+    })
   }, [copy.locale])
 
   return (
@@ -70,8 +61,6 @@ function App() {
         <AirPodsDemo />
         <HowItWorks />
         <Differentiation />
-        <Authority />
-        {copy.pricing.enabled && <Pricing />}
         <FAQ />
         <FinalCTA />
       </main>

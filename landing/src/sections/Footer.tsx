@@ -1,10 +1,7 @@
 import { Container } from '../components/Container'
 import { EmailForm } from '../components/EmailForm'
-import { useCopy } from '../hooks/useCopy'
 
 export function Footer() {
-  const copy = useCopy()
-
   return (
     <footer className="border-t border-line bg-bg-cool py-12 md:py-16">
       <Container>
@@ -19,9 +16,12 @@ export function Footer() {
 
           {/* 가운데: 빠른 링크 */}
           <nav className="flex flex-wrap gap-4 md:gap-6">
-            {copy.footer.links
-              .filter((link) => copy.pricing.enabled || link.target !== 'pricing')
-              .map(({ label, target }) => (
+            {[
+              ['How', 'how-it-works'],
+              ['FAQ', 'faq'],
+              ['Privacy', '#'],
+              ['Terms', '#'],
+            ].map(([label, target]) => (
               <a
                 key={label}
                 href={target.startsWith('#') ? target : `#${target}`}
@@ -40,12 +40,13 @@ export function Footer() {
 
           {/* 우: 작은 폼 */}
           <div>
-            <p className="mb-3 text-caption text-text-muted">{copy.footer.formLabel}</p>
+            <p className="mb-3 text-caption text-text-muted">진행 소식 받기</p>
             <EmailForm
               variant="caption"
-              ctaLabel={copy.footer.formCta}
-              placeholder={copy.footer.formPlaceholder}
+              ctaLabel="구독"
+              placeholder="이메일"
               helperText=""
+              source="footer"
             />
           </div>
         </div>

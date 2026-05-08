@@ -4,7 +4,7 @@ export function HealthScoreGauge({
   score = 72,
   change = 3,
   size = 200,
-  label = '위 건강 점수',
+  label = '식사 속도 점수',
   ariaLabel,
 }: {
   score?: number
@@ -44,7 +44,7 @@ export function HealthScoreGauge({
       width={size}
       height={size}
       role="img"
-      aria-label={ariaLabel ?? `위 건강 점수 ${score}, 어제 대비 ${change > 0 ? '+' : ''}${change}`}
+      aria-label={ariaLabel ?? `${label} ${score}, 어제 대비 ${change > 0 ? '+' : ''}${change}`}
     >
       {/* 배경 원 */}
       <circle cx="80" cy="80" r={r} stroke="#E8EAEE" strokeWidth="6" fill="none" />
@@ -69,7 +69,7 @@ export function HealthScoreGauge({
         textAnchor="middle"
         fontSize="36"
         fontWeight="700"
-        fill="#0A0E1A"
+        fill="#F5F7FA"
         fontFamily="Pretendard Variable, system-ui"
       >
         {animated ? score : 0}
@@ -79,7 +79,7 @@ export function HealthScoreGauge({
         y="100"
         textAnchor="middle"
         fontSize="11"
-        fill="#5A5F6E"
+        fill="#B2EFE3"
         fontFamily="Pretendard Variable, system-ui"
         letterSpacing="0.04em"
       >

@@ -4,6 +4,7 @@ import { ScrollIndicator } from '../components/ScrollIndicator'
 import { AirpodsSvg } from '../components/icons/AirpodsSvg'
 import { usePersonaRoute } from '../hooks/usePersonaRoute'
 import { personas } from '../data/personas'
+import { track } from '../lib/analytics'
 import { useCopy } from '../hooks/useCopy'
 
 function smoothScrollTo(id: string) {
@@ -14,19 +15,6 @@ export function Hero() {
   const persona = usePersonaRoute()
   const subhead = personas[persona].subhead
   const copy = useCopy()
-
-  function renderTitleLine(line: string) {
-    const accent = copy.hero.accents.find((a) => line.includes(a))
-    if (!accent) return line
-    const [before, after] = line.split(accent)
-    return (
-      <>
-        {before}
-        <span className="text-clinical-deep">{accent}</span>
-        {after}
-      </>
-    )
-  }
 
   return (
     <section
@@ -49,10 +37,9 @@ export function Hero() {
               className="text-display-lg lg:text-display-xl text-text-primary"
               style={{ fontWeight: 800, letterSpacing: '-0.025em' }}
             >
-              {copy.hero.title.map((line, i) => (
-                <span key={line}>
-                  {i > 0 && <br />}
-                  {renderTitleLine(line)}
+              {copy.hero.title.map((line) => (
+                <span key={line} className="block">
+                  {line}
                 </span>
               ))}
             </h1>
@@ -62,19 +49,16 @@ export function Hero() {
               className="text-body-lg text-text-secondary"
               style={{ ['--i' as never]: 1 }}
             >
-              {/* 데스크탑: 2줄 / 모바일: 3줄 */}
               <span className="hidden lg:inline">
-                {copy.hero.bodyDesktop.map((line, i) => (
-                  <span key={line}>
-                    {i > 0 && <br />}
+                {copy.hero.bodyDesktop.map((line) => (
+                  <span key={line} className="block">
                     {line}
                   </span>
                 ))}
               </span>
               <span className="lg:hidden">
-                {copy.hero.bodyMobile.map((line, i) => (
-                  <span key={line}>
-                    {i > 0 && <br />}
+                {copy.hero.bodyMobile.map((line) => (
+                  <span key={line} className="block">
                     {line}
                   </span>
                 ))}
@@ -82,19 +66,17 @@ export function Hero() {
             </p>
 
             {/* 페르소나별 서브헤드 — 모바일에서만 (자기 페르소나 페인 직접 자극) */}
-            {copy.locale === 'ko' && (
-              <div
-                data-reveal
-                className="rounded-lg border border-line/50 bg-bg-cool/60 p-4 text-body-sm text-text-secondary backdrop-blur lg:hidden"
-                style={{ ['--i' as never]: 2 }}
-              >
-                {subhead.map((line, i) => (
-                  <span key={i} className="block">
-                    {line}
-                  </span>
-                ))}
-              </div>
-            )}
+            <div
+              data-reveal
+              className="rounded-lg border border-line/50 bg-bg-cool/60 p-4 text-body-sm text-text-secondary backdrop-blur lg:hidden"
+              style={{ ['--i' as never]: 2 }}
+            >
+              {(copy.locale === 'ko' ? subhead : copy.problem.paragraphs.slice(0, 1)).map((line, i) => (
+                <span key={i} className="block">
+                  {line}
+                </span>
+              ))}
+            </div>
 
             <div
               data-reveal
@@ -104,14 +86,28 @@ export function Hero() {
               <CtaPrimary
                 label={copy.hero.primaryCta}
                 href="#final-cta"
-                onClick={() => smoothScrollTo('final-cta')}
-                trackingName="hero_primary_cta_click"
+                onClick={() => {
+                  track('cta_clicked', {
+                    cta_id: 'hero_primary',
+                    cta_text: copy.hero.primaryCta,
+                    location: 'hero',
+                    locale: copy.locale,
+                  })
+                  smoothScrollTo('final-cta')
+                }}
               />
               <CtaSecondary
                 href="#airpods-demo"
                 label={copy.hero.secondaryCta}
-                onClick={() => smoothScrollTo('airpods-demo')}
-                trackingName="hero_secondary_cta_click"
+                onClick={() => {
+                  track('cta_clicked', {
+                    cta_id: 'hero_secondary',
+                    cta_text: copy.hero.secondaryCta,
+                    location: 'hero',
+                    locale: copy.locale,
+                  })
+                  smoothScrollTo('airpods-demo')
+                }}
               />
             </div>
 
@@ -120,9 +116,9 @@ export function Hero() {
               className="flex flex-wrap items-center gap-x-2 gap-y-1 text-caption text-text-muted opacity-70"
               style={{ ['--i' as never]: 4 }}
             >
-              {copy.hero.trustSignals.map((signal, i) => (
+              {copy.hero.trustSignals.map((signal, index) => (
                 <span key={signal} className="contents">
-                  {i > 0 && <span aria-hidden>·</span>}
+                  {index > 0 && <span aria-hidden>·</span>}
                   <span>{signal}</span>
                 </span>
               ))}

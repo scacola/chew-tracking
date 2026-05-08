@@ -14,9 +14,8 @@ export function Problem() {
           className="text-heading-1 lg:text-display-lg text-center text-text-primary"
           style={{ fontWeight: 700, letterSpacing: '-0.02em' }}
         >
-          {copy.problem.title.map((line, i) => (
-            <span key={line}>
-              {i > 0 && <br />}
+          {copy.problem.title.map((line) => (
+            <span key={line} className="block">
               {line}
             </span>
           ))}
@@ -24,8 +23,8 @@ export function Problem() {
 
         <div data-reveal className="mt-12 lg:mt-16" style={{ ['--i' as never]: 1 }}>
           <div className="space-y-5 text-body-lg leading-relaxed text-text-secondary">
-            {copy.problem.paragraphs.map((paragraph, i) => (
-              <p key={paragraph} className={i === copy.problem.paragraphs.length - 1 ? 'text-text-primary' : undefined}>
+            {copy.problem.paragraphs.map((paragraph, index) => (
+              <p key={paragraph} className={index === copy.problem.paragraphs.length - 1 ? 'text-text-primary' : undefined}>
                 {paragraph}
               </p>
             ))}
@@ -40,7 +39,7 @@ export function Problem() {
         >
           {copy.problem.clocks.map((clock) => (
             <Clock
-              key={clock.label}
+              key={`${clock.minutes}-${clock.label}`}
               minutes={clock.minutes}
               target={clock.target}
               variant={clock.variant}
@@ -55,10 +54,10 @@ export function Problem() {
           className="mt-16 grid gap-4 md:grid-cols-2 md:gap-6"
         >
           {copy.problem.evidence.map((item) => (
-            <div key={item.source} data-reveal className="rounded-xl border-l-4 border-coaching bg-bg-cool p-6 shadow-sm">
+            <div key={item.accent} data-reveal className="rounded-xl border-l-4 border-coaching bg-bg-cool p-6 shadow-sm">
               <p className="text-heading-3 leading-snug text-text-primary">
-                {item.text}{' '}
-                <span className="text-coaching-deep">{item.accent}</span>
+                {item.text}
+                <span className="text-coaching-deep"> {item.accent}</span>
               </p>
               <p className="mt-3 text-caption text-text-muted">{item.source}</p>
             </div>

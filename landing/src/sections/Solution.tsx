@@ -3,7 +3,7 @@ import { Section } from '../components/Section'
 import { Container } from '../components/Container'
 import { useCopy } from '../hooks/useCopy'
 
-const iconMap = [Headphones, Activity, Sparkles]
+const icons = [Headphones, Activity, Sparkles]
 
 const accentMap = {
   clinical: { ring: 'ring-clinical-soft', icon: 'text-clinical-deep', label: 'text-clinical-deep' },
@@ -27,7 +27,7 @@ export function Solution() {
 
         <div data-reveal-stagger className="mt-16 grid gap-6 md:grid-cols-3 md:gap-8">
           {copy.solution.cards.map((card, index) => {
-            const Icon = iconMap[index] ?? Sparkles
+            const Icon = icons[index] ?? Sparkles
             const a = accentMap[card.accent]
             return (
               <div
@@ -46,13 +46,12 @@ export function Solution() {
                 </h3>
                 <p className="text-body leading-relaxed text-text-secondary">
                   {card.body.map((line) => (
-                    <span key={line}>
+                    <span key={line} className="block">
                       {line}
-                      <br />
                     </span>
                   ))}
                   {card.highlight && (
-                    <span className={card.accent === 'cta' ? 'text-text-primary font-medium' : 'text-text-muted'}>
+                    <span className="mt-2 block font-medium text-text-primary">
                       {card.highlight}
                     </span>
                   )}

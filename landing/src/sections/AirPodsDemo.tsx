@@ -22,17 +22,15 @@ export function AirPodsDemo() {
                 className="text-heading-1 lg:text-display-lg text-text-on-deep"
                 style={{ fontWeight: 700, letterSpacing: '-0.02em' }}
               >
-                {copy.demo.title.map((line, i) => (
-                  <span key={line}>
-                    {i > 0 && <br />}
+                {copy.demo.title.map((line) => (
+                  <span key={line} className="block">
                     {line}
                   </span>
                 ))}
               </h2>
               <p className="text-body-lg text-text-on-deep/75">
-                {copy.demo.body.map((line, i) => (
-                  <span key={line}>
-                    {i > 0 && <br />}
+                {copy.demo.body.map((line) => (
+                  <span key={line} className="block">
                     {line}
                   </span>
                 ))}

@@ -1,6 +1,6 @@
 ---
 name: chew-coach-landing
-description: 옵션 G "Chew & Calm Coach"의 인터랙티브 마케팅 랜딩 페이지를 5명의 전문 에이전트(카피라이터·디자이너·아키텍트·구현자·QA폴리셔)로 빌드하는 오케스트레이터. "랜딩 페이지 만들어줘", "마케팅 사이트 제작", "옵션 G 웹페이지", "Chew Coach 랜딩", "인터랙티브 사이트 빌드", "디스커버리 결과를 웹으로", "Apple급 랜딩" 같은 요청 시 반드시 사용. 후속 작업: "다시 빌드", "재실행", "카피만 수정", "디자인만 수정", "특정 섹션 다시", "QA만 다시", "폴리시 더", "이전 결과 기반 개선", "옵션 G 페이지 업데이트" 같은 표현에서도 트리거.
+description: 옵션 G "Chew & Calm Coach"의 인터랙티브 마케팅 랜딩 페이지를 6명+ 전문 에이전트(카피라이터·디자이너·아키텍트·구현자·QA폴리셔·데이터수집자·분석엔지니어)로 빌드·운영하는 오케스트레이터. "랜딩 페이지 만들어줘", "마케팅 사이트 제작", "옵션 G 웹페이지", "Chew Coach 랜딩", "인터랙티브 사이트 빌드", "디스커버리 결과를 웹으로", "Apple급 랜딩" 같은 요청 시 반드시 사용. 후속 작업: "다시 빌드", "재실행", "카피만 수정", "디자인만 수정", "특정 섹션 다시", "QA만 다시", "폴리시 더", "이전 결과 기반 개선", "옵션 G 페이지 업데이트", "이메일 수집", "폼 백엔드", "Supabase 연결", "데이터베이스 연결", "PostHog 붙여줘", "사용자 분석", "이벤트 트래킹", "funnel 만들어줘", "다이어트 위염 분류", "사용자 목적 수집", "마케팅 컨센트", "출시 시 연락 동의", "옵트인 추가" 같은 표현에서도 트리거.
 ---
 
 # Chew Coach Landing Orchestrator
@@ -16,6 +16,8 @@ Phase별 특성이 다르므로 하이브리드:
 | **Phase 1: 콘셉트 (팀)** | 에이전트 팀 (3명) | 카피·디자인·아키텍처는 *상호 영향* — 팀 통신으로 합의 |
 | **Phase 2: 구현** | 서브 (1명) | 단일 집중 작업, 팀 통신 불필요 |
 | **Phase 3: QA·폴리시** | 서브 (1명) | 독립 검증, 발견 시 재호출 트리거 |
+| **Phase 4: 데이터 수집 (가벼운)** | 서브 (1명) | 단순 폼 통합, 단독 트리거 |
+| **Phase 5: 분석·데이터 v2 인프라** | 페어 (2명) → 서브 다중 | 분석/데이터 모델 *합의* 필요 → UX/카피/구현/QA 단발 호출 |
 
 모든 Agent 호출은 **`model: "opus"`** 명시 필수.
 
@@ -34,6 +36,9 @@ Phase별 특성이 다르므로 하이브리드:
    - "디자인만 수정" → visual-experience-designer + landing-architect → frontend-implementer → QA
    - "QA만 다시" → landing-qa-polisher만
    - "특정 섹션 다시" → 해당 섹션 카피·디자인·구현 재호출
+   - "이메일 수집", "폼 백엔드", "데이터 수집 추가", "노션/구글시트 연결" → Phase 4 (가벼운 데이터 수집 통합) 단독 실행
+   - "PostHog 붙여줘", "사용자 분석", "이벤트 트래킹", "funnel" → Phase 5 (분석·데이터 v2 인프라) — analytics 단독 또는 페어
+   - "Supabase 연결", "데이터베이스로 받기", "옵트인 동의", "출시 시 연락 동의", "마케팅 컨센트", "다이어트 위염 분류", "사용자 목적 수집" → Phase 5 (분석·데이터 v2 인프라) — 페어 (analytics + data-collector) + 디자인·카피·구현·QA 단발 호출
    - 기존 산출물 미존재 → 초기 실행
 ```
 
@@ -45,6 +50,10 @@ Phase별 특성이 다르므로 하이브리드:
 | "특정 섹션 다시" | 3명 팀 모두 (해당 섹션만) → frontend-implementer → landing-qa-polisher |
 | "QA·폴리시 더" | landing-qa-polisher만 (필요 시 frontend-implementer 재호출) |
 | "성능만" | landing-architect (예산 재검토) → frontend-implementer (최적화) → landing-qa-polisher |
+| "이메일 수집·폼 백엔드 추가" | landing-data-collector (단독, Phase 4 모드) → 필요 시 marketing-storyteller (성공 메시지 카피) → landing-qa-polisher (폼 종단간 검수) |
+| "PostHog만 추가·이벤트 트래킹만" | landing-analytics-engineer (단독, Phase 5-A 모드) → frontend-implementer (영향 부분) → landing-qa-polisher (이벤트 발화 검증) |
+| "Supabase·옵트인·목적 수집 풀세트" | landing-analytics-engineer + landing-data-collector (페어, Phase 5-B 모드) → visual-experience-designer + marketing-storyteller (목적 UI + 컨센트 카피 단발) → frontend-implementer → landing-qa-polisher |
+| "옵트인 카피만 다듬기" | marketing-storyteller (단독) → frontend-implementer (ConsentDialog 부분) → landing-qa-polisher |
 
 새 실행 시:
 ```bash
@@ -121,6 +130,119 @@ QA가 Critical 이슈 발견 시:
 - 구현자 재작업 필요 → frontend-implementer 1회 재호출
 - 디자인·카피 팀 재작업 필요 → 사용자에게 보고 후 Phase 1 부분 재실행 결정
 
+## Phase 4: 데이터 수집 통합 — 서브 에이전트 (후속·독립 모드)
+
+**실행 모드: 서브 에이전트 (단독)**
+
+랜딩 사이트가 이미 빌드된 후, *백엔드 없이* 사용자 데이터(이메일·웨이트리스트·피드백)를 수집하는 통합을 추가하는 후속 모드. Phase 1~3와 직교하며 단독으로 트리거 가능.
+
+```
+Agent({
+  description: "백엔드리스 데이터 수집 통합",
+  subagent_type: "general-purpose",
+  model: "opus",
+  prompt: "당신은 .claude/agents/landing-data-collector.md 에이전트다. .claude/skills/landing-data-collection/SKILL.md의 5축 비교 매트릭스(키 노출·CORS·무료 한도·운영 부하·가시성)를 따른다. 입력: landing/src/components/EmailForm.tsx + 사용자 요청(수집 목적·예상 트래픽·통지 채널·수신처 선호: 노션/구글시트/Formspree 등). 단계: (1) _workspace/landing/07_data_collection_options.md에 옵션 비교·추천 작성 → 사용자 승인 대기 → (2) 선택된 옵션 구현 (EmailForm.tsx + 필요 시 lib/dataCollection.ts + .env.example) → (3) 종단간 1건 제출 검증 + 스크린샷 → (4) _workspace/landing/08_data_collection_runbook.md 운영 가이드. 빌드 통과 + 클라이언트 번들에 비밀 0건 + 옵션 G 톤 카피 필수."
+})
+```
+
+Phase 4 진입 조건:
+- `landing/` 디렉토리와 `EmailForm.tsx`가 이미 존재
+- 사용자 요청이 데이터 수집 추가 (`이메일 수집 / 폼 백엔드 / 노션·구글시트 연결 / 웨이트리스트` 등)
+
+Phase 4 종료 후 권장 후속:
+- `landing-qa-polisher` 폼 종단간 검수 (Phase 3 부분 재실행)
+- 성공 메시지 카피가 변경됐다면 `marketing-storyteller`에게 톤 일관성 검토 요청
+
+## Phase 5: 분석·데이터 v2 인프라 — 페어 + 단발 호출
+
+**실행 모드: 하이브리드 (페어 → 서브 다중)**
+
+PostHog 분석 + Supabase 영구 백엔드 + 사용자 목적(`purpose`) 수집 + 마케팅 옵트인 컨센트를 통합 도입하는 후속 모드. Phase 4의 가벼운 폼 통합과 *상위 호환* — Phase 4 산출물이 있다면 마이그레이션 패스를 따른다.
+
+### Phase 5-A: 분석 단독 (PostHog만 추가)
+
+`landing-analytics-engineer` 단일 호출. 데이터 모델·백엔드 변경 불필요한 케이스 (이벤트 트래킹·funnel만 추가).
+
+```
+Agent({
+  description: "PostHog 분석 통합",
+  subagent_type: "general-purpose",
+  model: "opus",
+  prompt: "당신은 .claude/agents/landing-analytics-engineer.md 에이전트다. .claude/skills/landing-analytics-instrumentation/SKILL.md를 따른다. 입력: landing/ + 사용자 측정 질문. 단계: (1) _workspace/landing/09_analytics_plan.md 작성 → 사용자 검토 → (2) posthog-js 통합 (lib/posthogClient.ts + lib/analytics.ts + provider) → (3) 발화 지점 통합 (landing_view, cta_click, email_focus, form_submit_*) → (4) 종단간 1건 PostHog Activity 도달 확인. 빌드 통과 + PII 차단(data-ph-no-capture) + 단일 init 필수."
+})
+```
+
+### Phase 5-B: 풀세트 (분석 + Supabase + 컨센트 + 목적)
+
+페어로 시작 — `landing-analytics-engineer` + `landing-data-collector`가 데이터 모델·식별 정책을 *합의*. 그 후 디자인·카피·구현·QA 단발 호출.
+
+#### Step 5-B-1: 페어 합의 (TeamCreate 2명)
+```
+TeamCreate({
+  team_name: "landing-data-v2",
+  members: [
+    { name: "analytics", subagent_type: "general-purpose", model: "opus",
+      prompt: ".claude/agents/landing-analytics-engineer.md + .claude/skills/landing-analytics-instrumentation/SKILL.md 따름" },
+    { name: "collector", subagent_type: "general-purpose", model: "opus",
+      prompt: ".claude/agents/landing-data-collector.md + .claude/skills/landing-data-collection/SKILL.md (특히 references/supabase-integration.md) 따름" },
+  ],
+})
+```
+TaskCreate로 합의 포인트 명시:
+1. PostHog ↔ Supabase 데이터 분리 표 (역할 분담)
+2. distinctId hash 정책 + Supabase `posthog_distinct_id` 컬럼 합의
+3. `purpose` enum 값 (`diet`/`digestion`/`other`) — *양쪽에서 동일*
+4. `consent_*` 컬럼 + 컨센트 거절 시 분기 (identify 미호출)
+5. 환경변수 명세 (`VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`, `VITE_POSTHOG_KEY`, `VITE_POSTHOG_HOST`, `VITE_HASH_SALT`)
+
+산출물:
+- `_workspace/landing/09_analytics_plan.md` (analytics)
+- `_workspace/landing/10_consent_strategy.md` (analytics)
+- `_workspace/landing/11_analytics_dashboard.md` (analytics)
+- `_workspace/landing/12_supabase_schema.md` (collector)
+- `_workspace/landing/13_data_v2_consolidated.md` ← *합의 통합* — 두 산출물의 매칭 표·환경변수·코드 진입점 명세
+
+합의 후 `TeamDelete`.
+
+#### Step 5-B-2: 사용자 의사결정 게이트
+- Supabase 프로젝트 생성·anon key 받기 (사용자 액션 필요)
+- 컨센트 다이얼로그 카피·목적 라벨 사용자 검토
+- 13_data_v2_consolidated.md를 사용자에게 보고 + 승인 받기
+
+승인 후 다음 단계.
+
+#### Step 5-B-3: UX·카피 단발 호출 (병렬 가능)
+```
+Agent({ description: "목적 선택 UI", subagent_type: "general-purpose", model: "opus",
+  prompt: ".claude/agents/visual-experience-designer.md 에이전트로서, 13_data_v2_consolidated.md의 purpose enum을 EmailForm 위 라디오/세그먼트로 디자인. 컨센트 다이얼로그 인터랙션 사양도 함께. 출력: _workspace/landing/14_purpose_consent_ux.md" })
+
+Agent({ description: "컨센트·목적 카피", subagent_type: "general-purpose", model: "opus",
+  prompt: ".claude/agents/marketing-storyteller.md 에이전트로서, 13_data_v2_consolidated.md의 purpose 라벨 + 컨센트 다이얼로그 카피 + 성공 메시지 작성. 옵션 G 톤. 출력: _workspace/landing/15_consent_copy.md" })
+```
+
+#### Step 5-B-4: 구현 단독
+```
+Agent({ description: "분석·Supabase·컨센트·목적 통합 빌드",
+  subagent_type: "general-purpose", model: "opus",
+  prompt: ".claude/agents/frontend-implementer.md 에이전트. 입력: landing/ + 13/14/15. 변경: lib/supabaseClient.ts 신규 + lib/posthogClient.ts 신규 + lib/analytics.ts 신규 + lib/hashId.ts 신규 + lib/dataCollection.ts 갱신(Supabase 호출) + components/EmailForm.tsx (목적 UI + 컨센트 흐름) + components/ConsentDialog.tsx 신규 + .env.example 갱신 + main.tsx에 PostHog init. 빌드 통과 + TS strict 통과. 검증: 종단간 1건 → Supabase row + PostHog Activity 모두 확인. 출력: _workspace/landing/16_data_v2_build_report.md" })
+```
+
+#### Step 5-B-5: QA·폴리시
+```
+Agent({ description: "분석·데이터 v2 QA",
+  subagent_type: "general-purpose", model: "opus",
+  prompt: ".claude/agents/landing-qa-polisher.md 에이전트. 검증: (a) 폼 종단간 success/fail/duplicate 분기 (b) 컨센트 거절 시 identify 미호출 (c) PostHog autocapture가 이메일 input 캡처 안 함 (d) Supabase RLS — anon SELECT 차단 (e) 목적 3개 값 모두 발화 가능 (f) 5초 룰 + 4 디바이스. 출력: _workspace/landing/17_data_v2_qa_report.md + 직접 폴리시" })
+```
+
+### Phase 5 진입 조건
+- `landing/` 디렉토리 + `EmailForm.tsx` 이미 존재
+- 디스커버리 산출물 (`discovery_report.md`, `_workspace/04_product_ideation.md`) 존재 — `purpose` enum의 도메인 정합성 확인용
+- 사용자가 PostHog/Supabase 계정을 만들 수 있음 (혹은 만들 의사가 있음)
+
+### Phase 5 종료 후
+- 사용자에게 PostHog Insights URL + Supabase Dashboard URL 안내
+- 베타 첫 1주 후 funnel·purpose 분포 보고 + 카피·UX 조정 제안 (피드백 라운드)
+
 ## 데이터 전달 프로토콜
 
 **파일 기반** 전달:
@@ -134,6 +256,17 @@ QA가 Critical 이슈 발견 시:
   - `_workspace/landing/04_brief_consolidated.md` ← Phase 2 입력 핵심
   - `_workspace/landing/05_build_report.md`
   - `_workspace/landing/06_qa_report.md`
+  - `_workspace/landing/07_data_collection_options.md` (Phase 4)
+  - `_workspace/landing/08_data_collection_runbook.md` (Phase 4)
+  - `_workspace/landing/09_analytics_plan.md` (Phase 5 — analytics)
+  - `_workspace/landing/10_consent_strategy.md` (Phase 5 — analytics)
+  - `_workspace/landing/11_analytics_dashboard.md` (Phase 5 — analytics)
+  - `_workspace/landing/12_supabase_schema.md` (Phase 5 — collector)
+  - `_workspace/landing/13_data_v2_consolidated.md` (Phase 5 — 페어 합의)
+  - `_workspace/landing/14_purpose_consent_ux.md` (Phase 5 — designer)
+  - `_workspace/landing/15_consent_copy.md` (Phase 5 — storyteller)
+  - `_workspace/landing/16_data_v2_build_report.md` (Phase 5 — implementer)
+  - `_workspace/landing/17_data_v2_qa_report.md` (Phase 5 — QA)
   - `_workspace/landing/screenshots/` (디바이스별 캡처)
 - 이전 실행 보존: `_workspace/_landing_prev_YYYYMMDD_HHMMSS/`
 
@@ -209,6 +342,10 @@ Phase 1 팀 모드에서는 추가로:
 | "QA만 다시", "폴리시 더" | 검수만 | landing-qa-polisher만 |
 | "성능 개선", "Lighthouse 통과" | 성능 라운드 | architect → implementer → QA |
 | "옵션 F로 피벗" | 컨셉 자체 변경 | 디스커버리 결과 변경 — 큰 변경 안내 후 진행 |
+| "이메일 수집", "폼 백엔드", "노션 연결", "구글시트 연결", "웨이트리스트", "Formspree" | 가벼운 데이터 수집 통합 | Phase 4 단독 (landing-data-collector) |
+| "PostHog 붙여줘", "사용자 분석", "이벤트 트래킹", "funnel" | 분석 단독 | Phase 5-A (landing-analytics-engineer) |
+| "Supabase", "데이터베이스로 받기", "옵트인 동의", "출시 시 연락 동의", "마케팅 컨센트", "다이어트 위염 분류", "사용자 목적 수집" | 분석·데이터 v2 풀세트 | Phase 5-B (페어 + 단발 호출) |
+| "Web3Forms에서 Supabase로 마이그" | 마이그레이션 | Phase 5-B (collector가 마이그 패스 책임) |
 | "배포해줘", "Vercel 올려줘" | 배포 | vercel:deploy 스킬로 위임 (이 오케스트레이터 외) |
 
 오케스트레이터 우회하여 개별 에이전트를 직접 호출하지 않는다. 사용자가 그렇게 요청해도, 이 오케스트레이터가 적절한 모드로 분기하는 게 맞다.

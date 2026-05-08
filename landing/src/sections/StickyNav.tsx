@@ -1,7 +1,13 @@
 import { useEffect, useState } from 'react'
 import { CtaPrimary } from '../components/CtaPrimary'
 import { cn } from '../lib/cn'
+import { track } from '../lib/analytics'
 import { useCopy } from '../hooks/useCopy'
+
+const NAV_TARGET_TO_CTA_ID: Record<string, string> = {
+  'how-it-works': 'nav_how',
+  faq: 'nav_faq',
+}
 
 export function StickyNav() {
   const [scrolled, setScrolled] = useState(false)
@@ -39,7 +45,6 @@ export function StickyNav() {
         <nav className="hidden items-center gap-7 md:flex">
           {[
             [copy.nav.how, 'how-it-works'],
-            ...(copy.pricing.enabled ? [[copy.nav.pricing, 'pricing']] : []),
             [copy.nav.faq, 'faq'],
           ].map(([label, target]) => (
             <a
@@ -47,6 +52,12 @@ export function StickyNav() {
               href={`#${target}`}
               onClick={(e) => {
                 e.preventDefault()
+                track('cta_clicked', {
+                  cta_id: NAV_TARGET_TO_CTA_ID[target] ?? `nav_${target}`,
+                  cta_text: label,
+                  location: 'sticky_nav',
+                  locale: copy.locale,
+                })
                 document.getElementById(target)?.scrollIntoView({ behavior: 'smooth' })
               }}
               className="text-body-sm text-text-secondary transition-colors hover:text-text-primary"
@@ -60,10 +71,15 @@ export function StickyNav() {
           label={copy.nav.cta}
           size="md"
           href="#final-cta"
-          onClick={() =>
+          onClick={() => {
+            track('cta_clicked', {
+              cta_id: 'nav_join',
+              cta_text: copy.nav.cta,
+              location: 'sticky_nav',
+              locale: copy.locale,
+            })
             document.getElementById('final-cta')?.scrollIntoView({ behavior: 'smooth' })
-          }
-          trackingName="nav_cta_click"
+          }}
         />
       </div>
     </header>

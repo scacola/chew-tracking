@@ -3,7 +3,7 @@ type Row = { time: string; label: string; emphasis?: boolean }
 export function DataStream({
   rows,
   finale,
-  finaleLabel = '위 건강 점수 →',
+  finaleLabel = '식사 속도 점수 →',
 }: {
   rows: Row[]
   finale?: { score: number; change: number }
