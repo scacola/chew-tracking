@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from 'react'
 import { Mail, ArrowRight, Check } from 'lucide-react'
 import { cn } from '../lib/cn'
+import { useCopy } from '../hooks/useCopy'
 
 type Variant = 'inline' | 'stacked' | 'caption'
 
@@ -18,6 +19,7 @@ export function EmailForm({
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
   const [shake, setShake] = useState(false)
+  const copy = useCopy()
 
   const isCaption = variant === 'caption'
 
@@ -41,7 +43,7 @@ export function EmailForm({
     return (
       <div className={cn('flex items-center gap-2', isCaption ? 'text-caption' : 'text-body')}>
         <Check size={isCaption ? 16 : 20} strokeWidth={2} className="text-success" />
-        <span className="text-text-secondary">합류해주셔서 감사해요. 진행 소식을 보내드릴게요.</span>
+        <span className="text-text-secondary">{copy.form.success}</span>
       </div>
     )
   }
@@ -104,7 +106,7 @@ export function EmailForm({
             isCaption ? 'h-10 px-5 text-body-sm' : 'h-14 px-7 text-body',
           )}
         >
-          <span>{status === 'submitting' ? '처리 중...' : ctaLabel}</span>
+          <span>{status === 'submitting' ? copy.form.submitting : ctaLabel}</span>
           {status !== 'submitting' && <ArrowRight size={18} strokeWidth={1.75} />}
         </button>
       </div>
@@ -121,7 +123,7 @@ export function EmailForm({
       )}
       {status === 'error' && (
         <p className="text-caption text-error" role="alert">
-          이메일 주소 형식을 확인해주세요.
+          {copy.form.invalidEmail}
         </p>
       )}
     </form>

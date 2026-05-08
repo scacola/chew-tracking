@@ -4,10 +4,14 @@ export function HealthScoreGauge({
   score = 72,
   change = 3,
   size = 200,
+  label = '위 건강 점수',
+  ariaLabel,
 }: {
   score?: number
   change?: number
   size?: number
+  label?: string
+  ariaLabel?: string
 }) {
   const ref = useRef<SVGSVGElement>(null)
   const [animated, setAnimated] = useState(false)
@@ -40,7 +44,7 @@ export function HealthScoreGauge({
       width={size}
       height={size}
       role="img"
-      aria-label={`위 건강 점수 ${score}, 어제 대비 ${change > 0 ? '+' : ''}${change}`}
+      aria-label={ariaLabel ?? `위 건강 점수 ${score}, 어제 대비 ${change > 0 ? '+' : ''}${change}`}
     >
       {/* 배경 원 */}
       <circle cx="80" cy="80" r={r} stroke="#E8EAEE" strokeWidth="6" fill="none" />
@@ -79,7 +83,7 @@ export function HealthScoreGauge({
         fontFamily="Pretendard Variable, system-ui"
         letterSpacing="0.04em"
       >
-        위 건강 점수
+        {label}
       </text>
       <text
         x="80"

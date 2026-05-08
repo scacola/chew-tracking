@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react'
 import { CtaPrimary } from '../components/CtaPrimary'
 import { cn } from '../lib/cn'
+import { useCopy } from '../hooks/useCopy'
 
 export function StickyNav() {
   const [scrolled, setScrolled] = useState(false)
+  const copy = useCopy()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 100)
@@ -36,9 +38,9 @@ export function StickyNav() {
 
         <nav className="hidden items-center gap-7 md:flex">
           {[
-            ['작동 방식', 'how-it-works'],
-            ['가격', 'pricing'],
-            ['FAQ', 'faq'],
+            [copy.nav.how, 'how-it-works'],
+            ...(copy.pricing.enabled ? [[copy.nav.pricing, 'pricing']] : []),
+            [copy.nav.faq, 'faq'],
           ].map(([label, target]) => (
             <a
               key={target}
@@ -55,7 +57,7 @@ export function StickyNav() {
         </nav>
 
         <CtaPrimary
-          label="베타 합류"
+          label={copy.nav.cta}
           size="md"
           href="#final-cta"
           onClick={() =>
