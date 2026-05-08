@@ -3,6 +3,7 @@ import { Section } from '../components/Section'
 import { Container } from '../components/Container'
 import { FaqItemView } from '../components/FaqItem'
 import { useCopy } from '../hooks/useCopy'
+import { trackEvent } from '../lib/analytics'
 
 export function FAQ() {
   const [openId, setOpenId] = useState<string | null>(null)
@@ -29,7 +30,13 @@ export function FAQ() {
                   a={item.a}
                   highlight={item.highlight}
                   isOpen={openId === item.id}
-                  onToggle={() => setOpenId((cur) => (cur === item.id ? null : item.id))}
+                  onToggle={() => {
+                    setOpenId((cur) => {
+                      const next = cur === item.id ? null : item.id
+                      if (next) trackEvent('faq_open', { locale: copy.locale, faq_id: item.id })
+                      return next
+                    })
+                  }}
                 />
               </div>
             ))}

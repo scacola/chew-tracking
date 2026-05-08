@@ -1,21 +1,25 @@
 import { ArrowRight } from 'lucide-react'
 import { cn } from '../lib/cn'
+import { trackEvent } from '../lib/analytics'
 
 export function CtaSecondary({
   href,
   label,
   onClick,
   className,
+  trackingName,
 }: {
   href: string
   label: string
   onClick?: () => void
   className?: string
+  trackingName?: string
 }) {
   return (
     <a
       href={href}
       onClick={(e) => {
+        if (trackingName) trackEvent(trackingName, { label })
         if (href.startsWith('#') && onClick) {
           e.preventDefault()
           onClick()

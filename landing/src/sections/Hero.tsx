@@ -105,11 +105,13 @@ export function Hero() {
                 label={copy.hero.primaryCta}
                 href="#final-cta"
                 onClick={() => smoothScrollTo('final-cta')}
+                trackingName="hero_primary_cta_click"
               />
               <CtaSecondary
                 href="#airpods-demo"
                 label={copy.hero.secondaryCta}
                 onClick={() => smoothScrollTo('airpods-demo')}
+                trackingName="hero_secondary_cta_click"
               />
             </div>
 

@@ -13,6 +13,7 @@ import { FinalCTA } from './sections/FinalCTA'
 import { Footer } from './sections/Footer'
 import { initRevealOnScroll } from './interactions/revealOnScroll'
 import { useCopy } from './hooks/useCopy'
+import { initClarity, trackLandingView } from './lib/analytics'
 
 function App() {
   const copy = useCopy()
@@ -54,6 +55,9 @@ function App() {
     document.querySelector('meta[property="og:locale"]')?.setAttribute('content', meta.ogLocale)
     const skipLink = document.querySelector<HTMLAnchorElement>('.skip-link')
     if (skipLink) skipLink.textContent = meta.skip
+
+    initClarity()
+    trackLandingView(copy.locale, window.location.pathname)
   }, [copy.locale])
 
   return (

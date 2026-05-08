@@ -2,6 +2,7 @@ import { useState, type FormEvent } from 'react'
 import { Mail, ArrowRight, Check } from 'lucide-react'
 import { cn } from '../lib/cn'
 import { useCopy } from '../hooks/useCopy'
+import { trackEvent } from '../lib/analytics'
 
 type Variant = 'inline' | 'stacked' | 'caption'
 
@@ -35,7 +36,7 @@ export function EmailForm({
     // placeholder — 실제 백엔드 연결 전
     setTimeout(() => {
       setStatus('success')
-      console.log('[track] beta_signup', { email, variant })
+      trackEvent('beta_signup_submit', { locale: copy.locale, variant })
     }, 700)
   }
 

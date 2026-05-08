@@ -63,6 +63,7 @@ export function StickyNav() {
           onClick={() =>
             document.getElementById('final-cta')?.scrollIntoView({ behavior: 'smooth' })
           }
+          trackingName="nav_cta_click"
         />
       </div>
     </header>

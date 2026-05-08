@@ -96,6 +96,7 @@ export function Pricing() {
                     document.getElementById('final-cta')?.scrollIntoView({ behavior: 'smooth' })
                   }
                   className={cn(!tier.recommended && 'bg-text-primary hover:bg-text-secondary')}
+                  trackingName="pricing_cta_click"
                 />
                 <p className="text-caption text-text-muted">{tier.cancelPolicy}</p>
               </div>
